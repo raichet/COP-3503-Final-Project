@@ -18,13 +18,13 @@ public:
 
 	void printBoard(bool pNum);
 
-	void checkHit(string loc1, string loc2);
+	string checkHit(string loc1, string loc2);//(Mjarvis1997) changed from void to string
 
 	void updateBoard(string loc1, string loc2);
 
 	void placeShips();
 
-	void makePlayer(bool pType);
+	void makePlayers(bool isTwoPlayers);//(Mjarvis1997) changed from "void makePlayer(bool pType)"
 
 	int cleanInput(string input);
 

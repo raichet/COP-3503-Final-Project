@@ -11,7 +11,7 @@ class player {
 
 	int playerBoard[10][10];
 
-	int playerShips[5];
+	int playerShips[] = { 5,4,3,2,2 };//(MJarvis1997) Assigns known HP values right off the bat
 
 	bool winning;
 
