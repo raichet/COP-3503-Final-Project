@@ -1,5 +1,5 @@
 #ifndef GAME_H
-#define GAME_H
+#define GAME_H	 
 
 #include "player.h"
 #include <iostream>
@@ -8,7 +8,7 @@
 using namespace std;
 
 
-class Game {
+class game {
 
 	player* p1;
 	player* p2;
@@ -26,7 +26,7 @@ public:
 
 	void makePlayers(bool isTwoPlayers);//(Mjarvis1997) changed from "void makePlayer(bool pType)"
 
-	int cleanInput(string input);
+	int cleanInput(string input, int range);
 
 	void fire();
 
