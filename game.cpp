@@ -1,26 +1,32 @@
 #include "game.h"
 
 
-game::game()//initiates game by deterimining # of players, and creating player objects accordingly
+Game::game()//initiates game by deterimining # of players, and creating player objects accordingly
 {
-	string temp;
-	
+	string choice="0";
+	bool isTwoPlayers=false;
 
-	cout << "Make a new game" << endl;
-	cout << "1 or 2 players" << endl;
+	cout << "Welcome to Battleship!" << endl;
+	cout << "Please choose the number of player(s). (1 or 2): ";
 	//add code for that here
 
-	cin >> temp;//(MJarvis1997) Added input to establish the # of players with bool isTwoPlayers
-	if (temp == "1")
+	while (choice!="1" && choice!="2")
 	{
-		isTwoPlayers = false;
+		cin >> choice;//(MJarvis1997) Added input to establish the # of players with bool isTwoPlayers
+		if (choice == "1")
+		{
+			isTwoPlayers = false;
+		}
+		else if (choice == "2")
+		{
+			isTwoPlayers = true;
+		}
+		else
+		{
+			cout<<"Invalid input. Please only type in 1 or 2 to specify number of players: "
+		}
 	}
-	if (temp == "2")
-	{
-		isTwoPlayers = true;
-	}
-	temp = "";
-
+	cout<<"The game will now start."<<endl;
 	makePlayers(isTwoPlayers);
 
 
@@ -28,7 +34,7 @@ game::game()//initiates game by deterimining # of players, and creating player o
 
 //deconstructor?
 
-void game::printBoard(bool isP1)
+void Game::printBoard(bool isP1)
 {
 	string temp = "";
 
@@ -48,10 +54,10 @@ void game::printBoard(bool isP1)
 	cout << temp << endl;
 }
 
-void game::fire(bool isP1)//determines coordinates of fire position(whether from a realPlayer or an AI) and then uses checkHit and updateBoard to make the according changes
+void Game::fire(bool isP1)//determines coordinates of fire position(whether from a realPlayer or an AI) and then uses checkHit and updateBoard to make the according changes
 						  //(Mjarvis1997) added bool parameter so that game.fire can be used for both real and computer players
 {
-	
+
 	if (isP1)//(Mjarvis1997) fires for first player
 	{
 		int temp;//(Mjarvis1997)changed to int from string to accomodate intArray[][] normal form
@@ -62,9 +68,9 @@ void game::fire(bool isP1)//determines coordinates of fire position(whether from
 		cout << "Please select y" << endl;
 		cin >> temp2;
 		checkHit(temp, temp2, isP1);
-		
-			//cout << cleanInput(temp, 10) << endl; //10 is max int allowed
-			//cout << cleanInput(temp2, 10) << endl;
+
+			//cout << cleanInput(temp) << endl;
+			//cout << cleanInput(temp2) << endl;
 	}
 	if ((!isP1) && isTwoPlayers)//(Mjarvis1997) fires for real second player
 	{
@@ -86,7 +92,7 @@ void game::fire(bool isP1)//determines coordinates of fire position(whether from
 }
 //(Mjarvis1997) changed function type to string, so it can return the results of the hit, added currentPlayer parameter
 //added all the if statements to update the board based on the check
-string game::checkHit(int loc1, int loc2, bool isP1)//(Mjarvis1997) determines if the chosen location is a hit/miss or has been already chosen
+string Game::checkHit(int loc1, int loc2, bool isP1)//(Mjarvis1997) determines if the chosen location is a hit/miss or has been already chosen
 {
 	//used by fire method
 	if (isP1)
@@ -95,7 +101,7 @@ string game::checkHit(int loc1, int loc2, bool isP1)//(Mjarvis1997) determines i
 		{
 			p2->updateBoard(loc1, loc2, 2);//marks missed ship with value of 2
 			return "miss";
-			
+
 		}
 		if ((p2->getBoardValue(loc1, loc2)) == 1)//already hit ship here
 		{
@@ -139,13 +145,13 @@ string game::checkHit(int loc1, int loc2, bool isP1)//(Mjarvis1997) determines i
 
 
 //uses set method in player class modifyShips((int x, int y, string orientation, int shipType)
-void game::placeShips()
+void Game::placeShips()
 {
 
 }
 
 
-void game::makePlayers(bool isTwoPlayers)//(Mjarvis1997)changed pType to isTwoPlayers
+void Game::makePlayers(bool isTwoPlayers)//(Mjarvis1997)changed pType to isTwoPlayers
 {
 	//for making comp player
 	//(Mjarvis1997) moved this here from game function to consolidate all the player creation to this makePlayer function
@@ -178,10 +184,12 @@ void game::makePlayers(bool isTwoPlayers)//(Mjarvis1997)changed pType to isTwoPl
 }
 
 //everytime taking in cord info as string
-int game::cleanInput(string input, int range)
+int Game::cleanInput(string input)
 {
 	int t1;
 	int t2;
+
+	//does not yet check if string num is num 1-10
 
 	t1 = input[0];
 	t1 -= 48;
@@ -195,16 +203,11 @@ int game::cleanInput(string input, int range)
 
 	}
 
-	if (t1 < 1 || t1 > range)
-		t1 = -1;
-
 	return t1;
 }
 
 //used by bship to run game
-void game::gRound(bool isP1) //true = p1
+void Game::gRound(bool isP1) //true = p1
 {
 	//game turn logic.
 }
-
-
