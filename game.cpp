@@ -158,13 +158,13 @@ void Game::makePlayers(bool isTwoPlayers)//(Mjarvis1997)changed pType to isTwoPl
 	if (isTwoPlayers) // 2 players, else is 1 and comp
 	{
 		string temp;
-		cout << "Player 1 enter name:" << endl;
+		cout << "Player 1 enter name: " << endl;
 		cin >> temp;
 		p1 = new player(temp);
 
 		temp = "";
 
-		cout << "Player 2 enter name:" << endl;
+		cout << "Player 2 enter name: " << endl;
 		cin >> temp;
 		p2 = new player(temp);
 	}
