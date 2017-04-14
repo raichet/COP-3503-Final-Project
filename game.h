@@ -1,5 +1,5 @@
 #ifndef GAME_H
-#define GAME_H	 
+#define GAME_H
 
 #include "player.h"
 #include <iostream>
@@ -8,7 +8,7 @@
 using namespace std;
 
 
-class game {
+class Game {
 
 	player* p1;
 	player* p2;
