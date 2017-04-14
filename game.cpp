@@ -184,7 +184,7 @@ void Game::makePlayers(bool isTwoPlayers)//(Mjarvis1997)changed pType to isTwoPl
 }
 
 //everytime taking in cord info as string
-int Game::cleanInput(string input)
+int Game::cleanInput(string input, int range)
 {
 	int t1;
 	int t2;
@@ -202,6 +202,10 @@ int Game::cleanInput(string input)
 		t1 += t2;
 
 	}
+	
+	if (t1 < 1 || t1 > range)
+		t1 = -1;
+
 
 	return t1;
 }
