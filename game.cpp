@@ -242,20 +242,20 @@ void Game::gRound(bool isP1) //true = p1
 {
 	//clear board method
 	//cout << "\033[2J\033[1;1H";?
-	
+
 	if(isP1)
 		cout << "Player 1's turn!" << endl;
 	else
 		cout << "Player 2's turn!" << endl;
-		
+
 	if(isTwoPlayers)
 	{
 		cout << "Press Y when ready!" << endl;
 		int x;
 		cin >> x;//maybe make not sucky
-		
+
 		printBoard(isP1);
-	
+
 		fire(isP1);
 	}
 	//else for a.i.
@@ -264,19 +264,19 @@ void Game::gRound(bool isP1) //true = p1
 void Game::gControl() //true = p1
 {
 	bool playerBool = true;
-	
+
 	//some ship place method here
-	
+
 	while (p1->isWin() == false && p2->isWin() == false)
 	{
 		gRound(playerBool);
-		
+
 		if (playerBool == true)
 			playerBool = false;
 		else
 			playerBool = true;
 	}
-		
+
 	if (p1->isWin() == true) //true means lose
 	{
 		cout << "player 2 wins!\n";
@@ -286,4 +286,3 @@ void Game::gControl() //true = p1
 		cout << "player 1 wins!\n";
 	}
 }
-

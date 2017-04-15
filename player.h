@@ -5,7 +5,7 @@
 
 using namespace std;
 
-class player {
+class Player {
 
 	string playerName;
 

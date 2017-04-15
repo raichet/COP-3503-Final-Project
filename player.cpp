@@ -1,6 +1,6 @@
 #include "player.h"
 
-player::player(string name)
+Player::player(string name)
 {
 	//make name const?
 	playerName = name;
@@ -8,7 +8,7 @@ player::player(string name)
 	this->resetBoard();
 }
 
-void player::resetBoard()
+void Player::resetBoard()
 {
 	for (int i = 0; i < 10; i++)
 		for (int j = 0; j < 10; j++)
@@ -18,7 +18,7 @@ void player::resetBoard()
 
 //modifyShips method assumes correct data type of arguments, but not correct range
 //modifyShips method will return false if x/y is out of range, orientation is not a valid direction, or shipType is out of range
-bool player::modifyShips(int x, int y, string orientation, int shipType)
+bool Player::modifyShips(int x, int y, string orientation, int shipType)
 {
 	int shipLength;
 
@@ -119,12 +119,12 @@ bool player::modifyShips(int x, int y, string orientation, int shipType)
 	}
 }
 
-bool player::isWin()
+bool Player::isWin()
 {
 	return true;
 }
 
-string player::getBoard(bool pNum)
+string Player::getBoard(bool pNum)
 {
 	string temp = this->getName();
 
@@ -149,11 +149,11 @@ string player::getBoard(bool pNum)
 	return temp;
 }
 
-string player::getName()
+string Player::getName()
 {
 	return playerName;
 }
 
-int getPlayerShips(int index) {
+int Player::getPlayerShips(int index) {
 	return playerShips[index];
 }
