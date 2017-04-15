@@ -145,9 +145,36 @@ string Game::checkHit(int loc1, int loc2, bool isP1)//(Mjarvis1997) determines i
 
 
 //uses set method in player class modifyShips((int x, int y, string orientation, int shipType)
-void Game::placeShips()
+//if parameter "player" is true, then player 1's board is being modified
+//otherwise if "player" is false, then player 2's board is being modified
+//assumes that player is inputting anchorpoints (x,y) in form "x y". Does not assume valid input
+void game::placeShips(bool player)
 {
+	int anchorPointX;
+	int anchorPointY;
+	int shipsPlacedCounter = 0;
+	string orientation;
+	bool validPlacement = false;
 
+	if (player) {
+		while (shipsPlacedCounter < 5) {
+			while (!validPlacement) {
+				cout << "Place your ship of length " + p1.getPlayerShips(shipsPlacedCounter) + ". What are the x and y coordinates?: " << endl;
+				cin >> anchorPointX >> anchorPointY;
+				cout << "What is the orientation of the ship?" << endl;
+				cin >> orientation;
+				validPlacement = p1.modifyShips(anchorPointX, anchorPointY, orientation, p1.getPlayerShips(shipsPlacedCounter));
+		}
+	} else {
+		while (shipsPlacedCounter < 5) {
+			while (!validPlacement) {
+				cout << "Place your ship of length " + p2.getPlayerShips(shipsPlacedCounter) + ". What are the x and y coordinates?: " << endl;
+				cin >> anchorPointX >> anchorPointY;
+				cout << "What is the orientation of the ship?" << endl;
+				cin >> orientation;
+				validPlacement = p2.modifyShips(anchorPointX, anchorPointY, orientation, p2.getPlayerShips(shipsPlacedCounter));
+		}
+	}
 }
 
 
@@ -202,7 +229,7 @@ int Game::cleanInput(string input, int range)
 		t1 += t2;
 
 	}
-	
+
 	if (t1 < 1 || t1 > range)
 		t1 = -1;
 
