@@ -13,28 +13,30 @@ int main()
 	
 	do
 	{
-		g1 = new gGame();
-		g1->gControl;
+		g1 = new Game();
+		g1->gControl();
 		cout << "Would you like to play again? (y/n)" << endl;
 		cin >> choice;
-		while ( playAgain != null)
+		
+		while (choice != "y" || choice != "n")
 		{
-			if (choice == "y")
-			{
-				playAgain = true;
-			}
-			else if (choice =="n")
-			{
-				playAgain = false;
-			}
-			else
-			{
-				cout << "Unreadable input. Please try again... " << endl;
-				cin >> choice;
-			}
+
+			cout << "Unreadable input. Please try again... " << endl;
+			cin >> choice;
+			
 		}
+		
+		if (choice == "y")
+		{
+			playAgain = true;
+		}
+		if (choice =="n")
+		{
+			playAgain = false;
+		}
+		
 	delete g1;
-	} whlie (playAgain == true); 
+	} while (playAgain == true); 
 	
 	
 	return 0;
