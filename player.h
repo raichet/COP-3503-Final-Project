@@ -20,13 +20,15 @@ public:
 
 	void resetBoard();
 
-	void modifyShips(int x, int y, string orientation, int shipType);
+	bool modifyShips(int x, int y, string orientation, int shipType);
 
 	bool isWin();
 
 	string getBoard(bool pNum);
 
 	string getName();
+
+	int getPlayerShips(int index);
 
 };
 
