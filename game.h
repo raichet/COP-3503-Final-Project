@@ -32,6 +32,8 @@ public:
 
 	void gRound(bool isP);
 
+	void gControl();
+
 
 };
 
