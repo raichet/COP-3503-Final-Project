@@ -18,7 +18,7 @@ int main()
 		cout << "Would you like to play again? (y/n)" << endl;
 		cin >> choice;
 		
-		while (choice != "y" || choice != "n")
+		while (choice != "y" && choice != "n")
 		{
 
 			cout << "Unreadable input. Please try again... " << endl;
