@@ -4,17 +4,38 @@
 
 using namespace std;
 
-int main() {
+int main() 
+{
+	Game* g1;
+	bool playAgain;
+	string choice;
 
-	Game* g1 = new Game();
-
-	//g1->printBoard(true); //p1 board
-	//g1->printBoard(false); //p2 board
-
-	//need a loop with a win check
-	g1->gControl();
 	
-	delete g1;// need deconstructor
-
+	do
+	{
+		g1 = new gGame();
+		g1->gControl;
+		cout << "Would you like to play again? (y/n)" << endl;
+		cin >> choice;
+		while ( playAgain != null)
+		{
+			if (choice == "y")
+			{
+				playAgain = true;
+			}
+			else if (choice =="n")
+			{
+				playAgain = false;
+			}
+			else
+			{
+				cout << "Unreadable input. Please try again... " << endl;
+				cin >> choice;
+			}
+		}
+	delete g1;
+	} whlie (playAgain == true); 
+	
+	
 	return 0;
 }
