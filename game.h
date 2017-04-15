@@ -10,8 +10,8 @@ using namespace std;
 
 class Game {
 
-	player* p1;
-	player* p2;
+	Player* p1;
+	Player* p2;
 
 public:
 	Game();
