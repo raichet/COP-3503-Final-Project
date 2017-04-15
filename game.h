@@ -22,7 +22,7 @@ public:
 
 	void updateBoard(string loc1, string loc2);
 
-	void placeShips(bool player);
+	void placeShips();
 
 	void makePlayers(bool isTwoPlayers);//(Mjarvis1997) changed from "void makePlayer(bool pType)"
 
