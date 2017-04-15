@@ -121,7 +121,10 @@ bool Player::modifyShips(int x, int y, string orientation, int shipType)
 
 bool Player::isWin()
 {
-	return true;
+	if (playerShips[0] == 0 && playerShips[1] == 0 && playerShips[2] == 0 && playerShips[3] == 0 && playerShips[4] == 0)
+		return true;
+	else
+		return false;
 }
 
 string Player::getBoard(bool pNum)

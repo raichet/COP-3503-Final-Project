@@ -4,7 +4,7 @@
 Game::Game()//initiates game by deterimining # of players, and creating player objects accordingly
 {
 	string choice="0";
-	bool isTwoPlayers=false;
+	isTwoPlayers=false;
 
 	cout << "Welcome to Battleship!" << endl;
 	cout << "Please choose the number of player(s). (1 or 2): ";
@@ -265,6 +265,7 @@ void Game::gControl() //true = p1
 	bool playerBool = true;
 
 	//some ship place method here
+	
 
 	while (p1->isWin() == false && p2->isWin() == false)
 	{
