@@ -30,6 +30,10 @@ public:
 	string getName();
 
 	int getPlayerShips(int index);
+	
+	int getBoardValue (int loc1, int loc2);
+	
+	void updateBoard(int loc1, int loc2, int result);
 
 };
 
