@@ -1,7 +1,7 @@
 #include "game.h"
 
 
-Game::game()//initiates game by deterimining # of players, and creating player objects accordingly
+Game::Game()//initiates game by deterimining # of players, and creating player objects accordingly
 {
 	string choice="0";
 	bool isTwoPlayers=false;
@@ -23,7 +23,7 @@ Game::game()//initiates game by deterimining # of players, and creating player o
 		}
 		else
 		{
-			cout<<"Invalid input. Please only type in 1 or 2 to specify number of players: "
+			cout<<"Invalid input. Please only type in 1 or 2 to specify number of players: ";
 		}
 	}
 	cout<<"The game will now start."<<endl;
@@ -57,31 +57,28 @@ void Game::printBoard(bool isP1)
 void Game::fire(bool isP1)//determines coordinates of fire position(whether from a realPlayer or an AI) and then uses checkHit and updateBoard to make the according changes
 						  //(Mjarvis1997) added bool parameter so that game.fire can be used for both real and computer players
 {
+	
+	string temp;
+	string temp2;
 
 	if (isP1)//(Mjarvis1997) fires for first player
 	{
-		int temp;//(Mjarvis1997)changed to int from string to accomodate intArray[][] normal form
-		int temp2;
-
 		cout << "Please select x" << endl;
 		cin >> temp;
 		cout << "Please select y" << endl;
 		cin >> temp2;
-		checkHit(temp, temp2, isP1);
+		checkHit(cleanInput(temp, 2), cleanInput(temp2, 2), isP1);
 
 			//cout << cleanInput(temp) << endl;
 			//cout << cleanInput(temp2) << endl;
 	}
 	if ((!isP1) && isTwoPlayers)//(Mjarvis1997) fires for real second player
 	{
-		int temp;
-		int temp2;
-
 		cout << "Please select x" << endl;
 		cin >> temp;
 		cout << "Please select y" << endl;
 		cin >> temp2;
-		checkHit(temp, temp2, isP1);
+		checkHit(cleanInput(temp, 2), cleanInput(temp2, 2), isP1);
 	}
 	else
 	{
@@ -148,7 +145,7 @@ string Game::checkHit(int loc1, int loc2, bool isP1)//(Mjarvis1997) determines i
 //if parameter "player" is true, then player 1's board is being modified
 //otherwise if "player" is false, then player 2's board is being modified
 //assumes that player is inputting anchorpoints (x,y) in form "x y". Does not assume valid input
-void game::placeShips(bool player)
+void Game::placeShips(bool player)
 {
 	int anchorPointX;
 	int anchorPointY;
@@ -159,21 +156,21 @@ void game::placeShips(bool player)
 	if (player) {
 		while (shipsPlacedCounter < 5) {
 			while (!validPlacement) {
-				cout << "Place your ship of length " + p1.getPlayerShips(shipsPlacedCounter) + ". What are the x and y coordinates?: " << endl;
+				cout << "Place your ship of length " << p1->getPlayerShips(shipsPlacedCounter) << ". What are the x and y coordinates?: " << endl;
 				cin >> anchorPointX >> anchorPointY;
 				cout << "What is the orientation of the ship?" << endl;
 				cin >> orientation;
-				validPlacement = p1.modifyShips(anchorPointX, anchorPointY, orientation, p1.getPlayerShips(shipsPlacedCounter));
+				validPlacement = p1->modifyShips(anchorPointX, anchorPointY, orientation, p1->getPlayerShips(shipsPlacedCounter));
 			}
 		}
 	} else {
 		while (shipsPlacedCounter < 5) {
 			while (!validPlacement) {
-				cout << "Place your ship of length " + p2.getPlayerShips(shipsPlacedCounter) + ". What are the x and y coordinates?: " << endl;
+				cout << "Place your ship of length " << p2->getPlayerShips(shipsPlacedCounter) << ". What are the x and y coordinates?: " << endl;
 				cin >> anchorPointX >> anchorPointY;
 				cout << "What is the orientation of the ship?" << endl;
 				cin >> orientation;
-				validPlacement = p2.modifyShips(anchorPointX, anchorPointY, orientation, p2.getPlayerShips(shipsPlacedCounter));
+				validPlacement = p2->modifyShips(anchorPointX, anchorPointY, orientation, p2->getPlayerShips(shipsPlacedCounter));
 			}
 		}
 	}

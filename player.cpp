@@ -41,14 +41,14 @@ bool Player::modifyShips(int x, int y, string orientation, int shipType)
 	}
 
 	if (orientation.compare("right") == 0) {
-		if (shipLength > (10 - x + 1) {
+		if (shipLength > (10 - x + 1)) {
 			cout << "Ship runs off right edge of board" << endl;
 			return false;
 		}
 		else {
 			for (int i = x - 1; i < (x - 1) + shipLength; i++) {
-				if (playerBoard[i][y] = shipType) {
-					cout << "The space (" + i + "," + y + ") was already occupied." << endl;
+				if (playerBoard[i][y] == shipType) {
+					cout << "The space (" << i << "," << y << ") was already occupied." << endl;
 					return false;
 				}
 			}
@@ -66,7 +66,7 @@ bool Player::modifyShips(int x, int y, string orientation, int shipType)
 		else {
 			for (int i = x - 1; i > (x - 1) - shipLength; i--) {
 				if (playerBoard[i][y] != 0) {
-					cout << "The space (" + i + "," + y + ") was already occupied." << endl;
+					cout << "The space (" << i << "," << y << ") was already occupied." << endl;
 					return false;
 				}
 			}
@@ -84,7 +84,7 @@ bool Player::modifyShips(int x, int y, string orientation, int shipType)
 		else {
 			for (int i = y - 1; i < (y - 1) + shipLength; i++) {
 				if (playerBoard[x][i] != 0) {
-					cout << "The space (" + x + "," + i + ") was already occupied." << endl;
+					cout << "The space (" << x << "," << i << ") was already occupied." << endl;
 					return false;
 				}
 			}
@@ -102,7 +102,7 @@ bool Player::modifyShips(int x, int y, string orientation, int shipType)
 		else {
 			for (int i = y - 1; i > (y - 1) - shipLength; i--) {
 				if (playerBoard[x][i] != 0) {
-					cout << "The space (" + x + "," + i + ") was already occupied." << endl;
+					cout << "The space (" << x << "," << i << ") was already occupied." << endl;
 					return false;
 				}
 			}
@@ -156,4 +156,12 @@ string Player::getName()
 
 int Player::getPlayerShips(int index) {
 	return playerShips[index];
+}
+
+int Player::getBoardValue (int loc1, int loc2) {
+		return playerBoard[loc1][loc2];
+}
+
+void Player::updateBoard(int loc1, int loc2, int result) {
+	playerBoard[loc1][loc2] = result;
 }

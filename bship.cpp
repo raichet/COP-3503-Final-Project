@@ -12,7 +12,7 @@ int main() {
 	//g1->printBoard(false); //p2 board
 
 	//need a loop with a win check
-	g1->gControl;
+	g1->gControl();
 	
 	delete g1;// need deconstructor
 
