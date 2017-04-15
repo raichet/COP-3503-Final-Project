@@ -67,7 +67,7 @@ void Game::fire(bool isP1)//determines coordinates of fire position(whether from
 		cin >> temp;
 		cout << "Please select y" << endl;
 		cin >> temp2;
-		checkHit(cleanInput(temp, 2), cleanInput(temp2, 2), isP1);
+		cout << checkHit(cleanInput(temp, 10), cleanInput(temp2, 10), isP1) << endl;
 
 			//cout << cleanInput(temp) << endl;
 			//cout << cleanInput(temp2) << endl;
@@ -78,7 +78,7 @@ void Game::fire(bool isP1)//determines coordinates of fire position(whether from
 		cin >> temp;
 		cout << "Please select y" << endl;
 		cin >> temp2;
-		checkHit(cleanInput(temp, 2), cleanInput(temp2, 2), isP1);
+		cout << checkHit(cleanInput(temp, 10), cleanInput(temp2, 10), isP1) << endl;
 	}
 	else
 	{
@@ -94,21 +94,21 @@ string Game::checkHit(int loc1, int loc2, bool isP1)//(Mjarvis1997) determines i
 	//used by fire method
 	if (isP1)
 	{
-		if ((p2->getBoardValue(loc1, loc2)) == 0)//hit water
+		if (p2->getBoardValue(loc1, loc2) == 0)//hit water
 		{
 			p2->updateBoard(loc1, loc2, 2);//marks missed ship with value of 2
 			return "miss";
 
 		}
-		if ((p2->getBoardValue(loc1, loc2)) == 1)//already hit ship here
+		if (p2->getBoardValue(loc1, loc2) == 1)//already hit ship here
 		{
 			return "already hit";
 		}
-		if ((p2->getBoardValue(loc1, loc2)) == 2)//already missed here
+		if (p2->getBoardValue(loc1, loc2) == 2)//already missed here
 		{
-			return " already miss";
+			return "already miss";
 		}
-		if ((p2->getBoardValue(loc1, loc2)) >= 5)//hit a ship
+		if (p2->getBoardValue(loc1, loc2) >= 5)//hit a ship
 		{
 			p2->updateBoard(loc1, loc2, 1);//marks hit ship with value of 1
 			return "hit";
@@ -116,21 +116,21 @@ string Game::checkHit(int loc1, int loc2, bool isP1)//(Mjarvis1997) determines i
 	}
 	else
 	{
-		if ((p1->getBoardValue(loc1, loc2)) == 0)//hit water
+		if (p1->getBoardValue(loc1, loc2) == 0)//hit water
 		{
 			p1->updateBoard(loc1, loc2, 2);//marks missed ship with value of 2
 			return "miss";
 
 		}
-		if ((p1->getBoardValue(loc1, loc2)) == 1)//already hit ship here
+		if (p1->getBoardValue(loc1, loc2) == 1)//already hit ship here
 		{
 			return "already hit";
 		}
-		if ((p1->getBoardValue(loc1, loc2)) == 2)//already missed here
+		if (p1->getBoardValue(loc1, loc2) == 2)//already missed here
 		{
-			return " already miss";
+			return "already miss";
 		}
-		if ((p1->getBoardValue(loc1, loc2)) >= 5)//hit a ship
+		if (p1->getBoardValue(loc1, loc2) >= 5)//hit a ship
 		{
 			p1->updateBoard(loc1, loc2, 1);//marks hit ship with value of 1
 			return "hit";
@@ -154,24 +154,32 @@ void Game::placeShips(bool player)
 	bool validPlacement = false;
 
 	if (player) {
+		cout<<"Player 1, please place your ship."<<endl;
 		while (shipsPlacedCounter < 5) {
+			validPlacement = false;
+			printBoard(true);
 			while (!validPlacement) {
 				cout << "Place your ship of length " << p1->getPlayerShips(shipsPlacedCounter) << ". What are the x and y coordinates?: " << endl;
 				cin >> anchorPointX >> anchorPointY;
-				cout << "What is the orientation of the ship?" << endl;
+				cout << "What is the orientation of the ship? (up, down, left, right)" << endl;
 				cin >> orientation;
-				validPlacement = p1->modifyShips(anchorPointX, anchorPointY, orientation, p1->getPlayerShips(shipsPlacedCounter));
+				validPlacement = p1->modifyShips(anchorPointX, anchorPointY, orientation, p1->getPlayerShipTypes(shipsPlacedCounter));
 			}
+			shipsPlacedCounter++;
 		}
 	} else {
+		cout<<"Player 2, please place your ship."<<endl;
 		while (shipsPlacedCounter < 5) {
+			validPlacement = false;
+			printBoard(false);
 			while (!validPlacement) {
 				cout << "Place your ship of length " << p2->getPlayerShips(shipsPlacedCounter) << ". What are the x and y coordinates?: " << endl;
 				cin >> anchorPointX >> anchorPointY;
-				cout << "What is the orientation of the ship?" << endl;
+				cout << "What is the orientation of the ship? (up, down, left, right)" << endl;
 				cin >> orientation;
-				validPlacement = p2->modifyShips(anchorPointX, anchorPointY, orientation, p2->getPlayerShips(shipsPlacedCounter));
+				validPlacement = p2->modifyShips(anchorPointX, anchorPointY, orientation, p2->getPlayerShipTypes(shipsPlacedCounter));
 			}
+			shipsPlacedCounter++;
 		}
 	}
 }
@@ -250,7 +258,7 @@ void Game::gRound(bool isP1) //true = p1
 	if(isTwoPlayers)
 	{
 		cout << "Press Y when ready!" << endl;
-		int x;
+		string x;
 		cin >> x;//maybe make not sucky
 
 		printBoard(isP1);
@@ -265,6 +273,8 @@ void Game::gControl() //true = p1
 	bool playerBool = true;
 
 	//some ship place method here
+	placeShips(true);
+	placeShips(false);
 	
 
 	while (p1->isWin() == false && p2->isWin() == false)
