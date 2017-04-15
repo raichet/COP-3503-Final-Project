@@ -152,36 +152,36 @@ string Player::getBoard(bool pNum)
 		for (int j = 0; j < 10; j++)
 		{
 			if(playerBoard[j][i] == 0) //water
-				temp = temp + "0" + " ";
+				temp = temp + "🌊" + " ";
 			else if (playerBoard[j][i] == 1) //hit ship
-				temp = temp + "1" + " ";
+				temp = temp + "💥" + " ";
 			else if (playerBoard[j][i] == 2) //missed ship
-				temp = temp + "2" + " ";
+				temp = temp + "❌" + " ";
 			else if (playerBoard[j][i] >= 5 && pNum == true) //ship
 			{
 				if (playerBoard[j][i] == 5)
 				{
-					temp = temp + "5" + " ";
+					temp = temp + "🚢" + " ";
 				}
 				else if (playerBoard[j][i] == 6)
 				{
-					temp = temp + "6" + " ";
+					temp = temp + "🛳️" + " ";
 				}
 				else if (playerBoard[j][i] == 7)
 				{
-					temp = temp + "7" + " ";
+					temp = temp + "🛥️" + " ";
 				}
 				else if (playerBoard[j][i] == 8)
 				{
-					temp = temp + "8" + " ";
+					temp = temp + "🚣🏿‍♀️" + " ";
 				}
 				else if (playerBoard[j][i] == 9)
 				{
-					temp = temp + "9" + " ";
+					temp = temp + "⛵" + " ";
 				}
 			}
 			else
-				temp = temp + "~" + " ";
+				temp = temp + "🌊" + " ";
 
 		}
 	}
