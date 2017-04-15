@@ -287,4 +287,6 @@ void Game::gControl() //true = p1
 	{
 		cout << "player 1 wins!\n";
 	}
+	delete p1;
+	delete p2;
 }
