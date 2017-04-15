@@ -189,25 +189,25 @@ void Game::makePlayers(bool isTwoPlayers)//(Mjarvis1997)changed pType to isTwoPl
 		string temp;
 		cout << "Player 1 enter name: " << endl;
 		cin >> temp;
-		p1 = new player(temp);
+		p1 = new Player(temp);
 
 		temp = "";
 
 		cout << "Player 2 enter name: " << endl;
 		cin >> temp;
-		p2 = new player(temp);
+		p2 = new Player(temp);
 	}
 	else//(MJarvis1997)Filled in this else statement to create 1 player of inputted name, and also to create an AI player object
 	{
 		string temp;
 		cout << "Player 1 enter name:" << endl;
 		cin >> temp;
-		p1 = new player(temp);
+		p1 = new Player(temp);
 
 		temp = "";
 
 		cout << "A 'BattleBot' has been created for you to test your skills against!";
-			p2 = new player("BattleBot");
+			p2 = new Player("BattleBot");
 	}
 
 }

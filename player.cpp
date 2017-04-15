@@ -1,6 +1,6 @@
 #include "player.h"
 
-Player::player(string name)
+Player::Player(string name)
 {
 	//make name const?
 	playerName = name;

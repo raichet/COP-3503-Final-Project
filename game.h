@@ -14,7 +14,7 @@ class Game {
 	player* p2;
 
 public:
-	game();
+	Game();
 
 	void printBoard(bool pNum);
 

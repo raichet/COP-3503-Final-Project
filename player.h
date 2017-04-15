@@ -2,6 +2,7 @@
 #define PLAYER_H
 
 #include <string>
+#include <iostream>
 
 using namespace std;
 
@@ -11,12 +12,12 @@ class Player {
 
 	int playerBoard[10][10];
 
-	int playerShips[] = { 5,4,3,2,2 };//(MJarvis1997) Assigns known HP values right off the bat
+	int playerShips[5] = { 5,4,3,2,2 };//(MJarvis1997) Assigns known HP values right off the bat
 
 	bool winning;
 
 public:
-	player(string name);
+	Player(string name);
 
 	void resetBoard();
 
