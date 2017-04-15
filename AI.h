@@ -20,9 +20,13 @@ public:
 
 	void resetBoard();
 
-	void modifyShips(int x, int y, string orientation, int shipType);
+	void modifyShips();
 
 	bool isWin();
+	
+	string getBoard();
+	
+	int getAIShips(int index);
 
 	void attack(string difficulty); // Attacks the player using specified algorithm
                                   // 'Easy' describes randomly selecting every space; 'Hard' describes selecting spaces at random and when a space is hit, intuitively selecting spaces around the hit space
