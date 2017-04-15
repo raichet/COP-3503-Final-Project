@@ -28,7 +28,7 @@ bool Player::modifyShips(int x, int y, string orientation, int shipType)
 		shipLength = 4;
 	} else if (shipType == 7) {
 		shipLength = 3;
-	} else if (shipType == 8) {
+	} else if (shipType == 8 || shipType == 9) {
 		shipLength = 2;
 	} else {
 		cout << "Invalid input for variable shipType" << endl;
@@ -47,13 +47,13 @@ bool Player::modifyShips(int x, int y, string orientation, int shipType)
 		}
 		else {
 			for (int i = x - 1; i < (x - 1) + shipLength; i++) {
-				if (playerBoard[i][y] == shipType) {
+				if (playerBoard[i][y - 1] != 0) {
 					cout << "The space (" << i << "," << y << ") was already occupied." << endl;
 					return false;
 				}
 			}
 			for (int i = x - 1; i < (x - 1) + shipLength; i++) {
-				playerBoard[i][y] = shipType;
+				playerBoard[i][y - 1] = shipType;
 			}
 			return true;
 		}
@@ -65,13 +65,13 @@ bool Player::modifyShips(int x, int y, string orientation, int shipType)
 		}
 		else {
 			for (int i = x - 1; i > (x - 1) - shipLength; i--) {
-				if (playerBoard[i][y] != 0) {
+				if (playerBoard[i][y - 1] != 0) {
 					cout << "The space (" << i << "," << y << ") was already occupied." << endl;
 					return false;
 				}
 			}
 			for (int i = x - 1; i > (x - 1) - shipLength; i--) {
-				playerBoard[i][y] = shipType;
+				playerBoard[i][y - 1] = shipType;
 			}
 			return true;
 		}
@@ -83,13 +83,13 @@ bool Player::modifyShips(int x, int y, string orientation, int shipType)
 		}
 		else {
 			for (int i = y - 1; i < (y - 1) + shipLength; i++) {
-				if (playerBoard[x][i] != 0) {
+				if (playerBoard[x - 1][i] != 0) {
 					cout << "The space (" << x << "," << i << ") was already occupied." << endl;
 					return false;
 				}
 			}
 			for (int i = y - 1; i < (y - 1) + shipLength; i++) {
-				playerBoard[x][i] = shipType;
+				playerBoard[x - 1][i] = shipType;
 			}
 			return true;
 		}
@@ -101,13 +101,13 @@ bool Player::modifyShips(int x, int y, string orientation, int shipType)
 		}
 		else {
 			for (int i = y - 1; i > (y - 1) - shipLength; i--) {
-				if (playerBoard[x][i] != 0) {
+				if (playerBoard[x - 1][i] != 0) {
 					cout << "The space (" << x << "," << i << ") was already occupied." << endl;
 					return false;
 				}
 			}
 			for (int i = y - 1; i > (y - 1) - shipLength; i--) {
-				playerBoard[x][i] = shipType;
+				playerBoard[x - 1][i] = shipType;
 			}
 			return true;
 		}
@@ -135,16 +135,53 @@ string Player::getBoard(bool pNum)
 	{
 		temp = temp + "\n";
 
+		/*for (int j = 0; j < 10; j++)
+		{
+			if(playerBoard[j][i] == 0) //water
+				temp = temp + "~" + " ";
+			else if (playerBoard[j][i] == 1) //hit ship
+				temp = temp + "X" + " ";
+			else if (playerBoard[j][i] == 2) //missed ship
+				temp = temp + "*" + " ";
+			else if (playerBoard[j][i] >= 5 && pNum == true) //ship
+				temp = temp + "O" + " ";
+			else
+				temp = temp + "~" + " ";
+
+		}*/
 		for (int j = 0; j < 10; j++)
 		{
-			if(playerBoard[i][j] == 0) //water
+			if(playerBoard[j][i] == 0) //water
+				temp = temp + "0" + " ";
+			else if (playerBoard[j][i] == 1) //hit ship
+				temp = temp + "1" + " ";
+			else if (playerBoard[j][i] == 2) //missed ship
+				temp = temp + "2" + " ";
+			else if (playerBoard[j][i] >= 5 && pNum == true) //ship
+			{
+				if (playerBoard[j][i] == 5)
+				{
+					temp = temp + "5" + " ";
+				}
+				else if (playerBoard[j][i] == 6)
+				{
+					temp = temp + "6" + " ";
+				}
+				else if (playerBoard[j][i] == 7)
+				{
+					temp = temp + "7" + " ";
+				}
+				else if (playerBoard[j][i] == 8)
+				{
+					temp = temp + "8" + " ";
+				}
+				else if (playerBoard[j][i] == 9)
+				{
+					temp = temp + "9" + " ";
+				}
+			}
+			else
 				temp = temp + "~" + " ";
-			else if (playerBoard[i][j] == 1) //hit ship
-				temp = temp + "X" + " ";
-			else if (playerBoard[i][j] == 2) //missed ship
-				temp = temp + "*" + " ";
-			else if (playerBoard[i][j] >= 5 && pNum == true) //ship
-				temp = temp + "O" + " ";
 
 		}
 	}
@@ -157,6 +194,10 @@ string Player::getName()
 	return playerName;
 }
 
+int Player::getPlayerShipTypes(int index) {
+	return playerShipTypes[index];
+}
+
 int Player::getPlayerShips(int index) {
 	return playerShips[index];
 }
@@ -166,5 +207,5 @@ int Player::getBoardValue (int loc1, int loc2) {
 }
 
 void Player::updateBoard(int loc1, int loc2, int result) {
-	playerBoard[loc1][loc2] = result;
+	playerBoard[loc1-1][loc2-1] = result;
 }

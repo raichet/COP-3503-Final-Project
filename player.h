@@ -11,6 +11,8 @@ class Player {
 	string playerName;
 
 	int playerBoard[10][10];
+	
+	int playerShipTypes[5] = {5, 6, 7, 8, 9}; 
 
 	int playerShips[5] = { 5,4,3,2,2 };//(MJarvis1997) Assigns known HP values right off the bat
 
@@ -29,6 +31,8 @@ public:
 
 	string getName();
 
+	int getPlayerShipTypes(int index);
+	
 	int getPlayerShips(int index);
 	
 	int getBoardValue (int loc1, int loc2);
