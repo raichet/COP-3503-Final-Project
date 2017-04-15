@@ -105,7 +105,7 @@ string Game::checkHit(int loc1, int loc2, bool isP1)//(Mjarvis1997) determines i
 		}
 		if ((p2->getBoardValue(loc1, loc2)) == 1)//already hit ship here
 		{
-		return "already hit";
+			return "already hit";
 		}
 		if ((p2->getBoardValue(loc1, loc2)) == 2)//already missed here
 		{
@@ -164,6 +164,7 @@ void game::placeShips(bool player)
 				cout << "What is the orientation of the ship?" << endl;
 				cin >> orientation;
 				validPlacement = p1.modifyShips(anchorPointX, anchorPointY, orientation, p1.getPlayerShips(shipsPlacedCounter));
+			}
 		}
 	} else {
 		while (shipsPlacedCounter < 5) {
@@ -173,6 +174,7 @@ void game::placeShips(bool player)
 				cout << "What is the orientation of the ship?" << endl;
 				cin >> orientation;
 				validPlacement = p2.modifyShips(anchorPointX, anchorPointY, orientation, p2.getPlayerShips(shipsPlacedCounter));
+			}
 		}
 	}
 }
