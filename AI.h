@@ -7,7 +7,9 @@ using namespace std;
 
 class AI {
 
-	string difficulty; //Either 'Easy' or 'Hard'
+	string difficulty; 
+
+	string playerName;
 
 	int AIBoard[10][10];
 
@@ -15,21 +17,26 @@ class AI {
 
 	bool winning;
 
+
+
 public:
 	AI(string difficulty);
 
+	string getName();
+
 	void resetBoard();
 
-	void modifyShips();
+	void modifyShips(int x, int y, string orientation, int shipType);
+
+	string getBoard(bool AI);
+
+	int getBoardValue(int loc1, int loc2);
+
+	int updateBoard(int loc1, int loc2, int result);
 
 	bool isWin();
-	
-	string getBoard();
-	
-	int getAIShips(int index);
 
-	void attack(string difficulty); // Attacks the player using specified algorithm
-                                  // 'Easy' describes randomly selecting every space; 'Hard' describes selecting spaces at random and when a space is hit, intuitively selecting spaces around the hit space
+	void attack(string difficulty); // Attacks the player using specified algorithm 
 };
 
 #endif
