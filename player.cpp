@@ -129,7 +129,7 @@ bool Player::isWin()
 
 string Player::getBoard(bool pNum)
 {
-	string temp = this->getName();
+	string temp = "\nPlayer name: "+this->getName();
 
 	for (int i = 0; i < 10; i++)
 	{
@@ -137,7 +137,7 @@ string Player::getBoard(bool pNum)
 
 		if (i==0) 	//formats the grid with top row of
 		{
-			temp=temp+"0  ";
+			temp=temp+"0 ";
 		for (int k=1 ; k<=10 ; k++)
 		{
 			temp=temp+" "+to_string(k)+" ";
@@ -149,44 +149,44 @@ string Player::getBoard(bool pNum)
 		{
 		if (j==0 && i==9) //formats the grid with left column of
 		{
-			temp=temp+to_string(i+1)+" ";
+			temp=temp+to_string(i+1)+"";
 		}
 		else if (j==0 && i!=9)
 		{
-			temp=temp+to_string(i+1)+"  ";
+			temp=temp+to_string(i+1)+" ";
 		}
 			if(playerBoard[j][i] == 0) //water
 // Emoji display
-				temp = temp + "🌊" + " ";
+				temp = temp + " 🌊" + " ";
 			else if (playerBoard[j][i] == 1) //hit ship
-				temp = temp + "💥" + " ";
+				temp = temp + " 💥" + " ";
 			else if (playerBoard[j][i] == 2) //missed ship
-				temp = temp + "❌" + " ";
+				temp = temp + " ❌" + " ";
 			else if (playerBoard[j][i] >= 5 && pNum == true) //ship
 			{
 				if (playerBoard[j][i] == 5)
 				{
-					temp = temp + "🚢" + " ";
+					temp = temp + " 🚢" + " ";
 				}
 				else if (playerBoard[j][i] == 6)
 				{
-					temp = temp + "🛳️" + " ";
+					temp = temp + " 🛳️" + " ";
 				}
 				else if (playerBoard[j][i] == 7)
 				{
-					temp = temp + "🛥️" + " ";
+					temp = temp + " ⛴" + " ";
 				}
 				else if (playerBoard[j][i] == 8)
 				{
-					temp = temp + "🚣🏿‍♀️" + " ";
+					temp = temp + " ⛵" + " ";
 				}
 				else if (playerBoard[j][i] == 9)
 				{
-					temp = temp + "⛵" + " ";
+					temp = temp + " 🚣🏿‍♀️" + " ";
 				}
 			}
 			else
-				temp = temp + "🌊" + " ";
+				temp = temp + " 🌊" + " ";
 //  Non-emoji display
 // 				temp = temp + " ~" + " ";
 // 			else if (playerBoard[j][i] == 1) //hit ship
