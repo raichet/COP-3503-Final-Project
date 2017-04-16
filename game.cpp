@@ -6,7 +6,7 @@ Game::Game()//initiates game by deterimining # of players, and creating player o
 	string choice="0";
 	isTwoPlayers=false;
 
-	cout << "Welcome to Battleship!" << endl;
+	cout << "\033[1;31mWelcome to Battleship!\033[0m" << endl;
 	cout << "Please choose the number of player(s). (1 or 2): ";
 	//add code for that here
 
@@ -58,8 +58,8 @@ void Game::fire(bool isP1)//determines coordinates of fire position(whether from
 						  //(Mjarvis1997) added bool parameter so that game.fire can be used for both real and computer players
 {
 	
-	string temp;
-	string temp2;
+	int temp;
+	int temp2;
 
 	if (isP1)//(Mjarvis1997) fires for first player
 	{
@@ -67,7 +67,7 @@ void Game::fire(bool isP1)//determines coordinates of fire position(whether from
 		cin >> temp;
 		cout << "Please select y" << endl;
 		cin >> temp2;
-		cout << checkHit(cleanInput(temp, 10), cleanInput(temp2, 10), isP1) << endl;
+		cout << checkHit(temp, temp2, isP1) << endl;
 
 			//cout << cleanInput(temp) << endl;
 			//cout << cleanInput(temp2) << endl;
@@ -78,7 +78,7 @@ void Game::fire(bool isP1)//determines coordinates of fire position(whether from
 		cin >> temp;
 		cout << "Please select y" << endl;
 		cin >> temp2;
-		cout << checkHit(cleanInput(temp, 10), cleanInput(temp2, 10), isP1) << endl;
+		cout << checkHit(temp, temp2, isP1) << endl;
 	}
 	else
 	{
@@ -102,7 +102,7 @@ string Game::checkHit(int loc1, int loc2, bool isP1)//(Mjarvis1997) determines i
 	{
 		if (p2->getBoardValue(loc1, loc2) == 0)//hit water
 		{
-			p2->updateBoard(loc1, loc2, 2);//marks missed ship with value of 2
+			p2->updateBoard(loc1, loc2, 2, 0);//marks missed ship with value of 2
 			return "miss";
 
 		}
@@ -116,7 +116,7 @@ string Game::checkHit(int loc1, int loc2, bool isP1)//(Mjarvis1997) determines i
 		}
 		if (p2->getBoardValue(loc1, loc2) >= 5)//hit a ship
 		{
-			p2->updateBoard(loc1, loc2, 1);//marks hit ship with value of 1
+			p2->updateBoard(loc1, loc2, 1, p2->getBoardValue(loc1, loc2));//marks hit ship with value of 1
 			return "hit";
 		}
 	}
@@ -124,7 +124,7 @@ string Game::checkHit(int loc1, int loc2, bool isP1)//(Mjarvis1997) determines i
 	{
 		if (p1->getBoardValue(loc1, loc2) == 0)//hit water
 		{
-			p1->updateBoard(loc1, loc2, 2);//marks missed ship with value of 2
+			p1->updateBoard(loc1, loc2, 2, 0);//marks missed ship with value of 2
 			return "miss";
 
 		}
@@ -138,7 +138,7 @@ string Game::checkHit(int loc1, int loc2, bool isP1)//(Mjarvis1997) determines i
 		}
 		if (p1->getBoardValue(loc1, loc2) >= 5)//hit a ship
 		{
-			p1->updateBoard(loc1, loc2, 1);//marks hit ship with value of 1
+			p1->updateBoard(loc1, loc2, 1, p1->getBoardValue(loc1, loc2));//marks hit ship with value of 1
 			return "hit";
 		}
 	}
@@ -257,9 +257,9 @@ void Game::gRound(bool isP1) //true = p1
 	//cout << "\033[2J\033[1;1H";?
 
 	if(isP1)
-		cout << "Player 1's turn!" << endl;
+		cout << "\033[1;32mPlayer 1's turn!\033[0m" << endl;
 	else
-		cout << "Player 2's turn!" << endl;
+		cout << "\033[1;34mPlayer 2's turn!\033[0m" << endl;
 
 	if(isTwoPlayers)
 	{
