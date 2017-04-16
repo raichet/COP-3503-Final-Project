@@ -82,8 +82,14 @@ void Game::fire(bool isP1)//determines coordinates of fire position(whether from
 	}
 	else
 	{
-		// algorith for AI firing
-
+		if(/*using easy algorithm*/){
+			int attack = attackEasy() // (kriswawrzyniak) algorith for AI firing using easy algorithm 
+			temp = attack % 10; 
+			temp2 = attack /10 % 10; 
+			cout << checkHit(cleanInput(temp, 10), cleanInput(temp2, 10), false) << endl;
+		}
+		else /* using hard algorithm*/ 
+		
 	}
 
 }
