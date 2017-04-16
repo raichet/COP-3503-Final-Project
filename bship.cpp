@@ -10,6 +10,7 @@ int main()
 	bool playAgain;
 	string choice;
 
+	//system("/e[0;34m")
 	
 	do
 	{

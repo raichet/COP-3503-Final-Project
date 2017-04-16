@@ -203,9 +203,21 @@ int Player::getPlayerShips(int index) {
 }
 
 int Player::getBoardValue (int loc1, int loc2) {
-		return playerBoard[loc1][loc2];
+		return playerBoard[loc1-1][loc2-1];
 }
 
-void Player::updateBoard(int loc1, int loc2, int result) {
+void Player::updateBoard(int loc1, int loc2, int result, int shipType) {
 	playerBoard[loc1-1][loc2-1] = result;
+	
+	if (shipType > 4 && shipType < 10)
+	{
+		for(int i = 0; i < 5; i++) //use array size instead of hardcoded 5 for better standard and dynamic ship number
+		{
+			if(shipType == playerShipTypes[i] && playerShips[i] != 0)
+			{
+				playerShips[i]--;
+			}
+		}
+	}
+	// no error code if it does not find maching value
 }

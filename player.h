@@ -35,9 +35,9 @@ public:
 	
 	int getPlayerShips(int index);
 	
-	int getBoardValue (int loc1, int loc2);
+	int getBoardValue(int loc1, int loc2);
 	
-	void updateBoard(int loc1, int loc2, int result);
+	void updateBoard(int loc1, int loc2, int result, int shipType);
 
 };
 
