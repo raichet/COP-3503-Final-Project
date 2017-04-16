@@ -138,21 +138,21 @@ string Game::checkHit(int loc1, int loc2, bool isP1)//(Mjarvis1997) determines i
 		if (p2->getBoardValue(loc1, loc2) == 0)//hit water
 		{
 			p2->updateBoard(loc1, loc2, 2, 0);//marks missed ship with value of 2
-			return "Miss!";
+			return "miss";
 
 		}
 		if (p2->getBoardValue(loc1, loc2) == 1)//already hit ship here
 		{
-			return "Already hit! Don't waste your shot!";
+			return "already hit";
 		}
 		if (p2->getBoardValue(loc1, loc2) == 2)//already missed here
 		{
-			return "Already missed! Don't waste your shot!";
+			return "already miss";
 		}
 		if (p2->getBoardValue(loc1, loc2) >= 5)//hit a ship
 		{
 			p2->updateBoard(loc1, loc2, 1, p2->getBoardValue(loc1, loc2));//marks hit ship with value of 1
-			return "Hit!";
+			return "hit";
 		}
 	}
 	else
@@ -160,21 +160,21 @@ string Game::checkHit(int loc1, int loc2, bool isP1)//(Mjarvis1997) determines i
 		if (p1->getBoardValue(loc1, loc2) == 0)//hit water
 		{
 			p1->updateBoard(loc1, loc2, 2, 0);//marks missed ship with value of 2
-			return "Miss!";
+			return "miss";
 
 		}
 		if (p1->getBoardValue(loc1, loc2) == 1)//already hit ship here
 		{
-			return "Already hit! Don't waste your shot!";
+			return "already hit";
 		}
 		if (p1->getBoardValue(loc1, loc2) == 2)//already missed here
 		{
-			return "Already missed! Don't waste your shot!";
+			return "already miss";
 		}
 		if (p1->getBoardValue(loc1, loc2) >= 5)//hit a ship
 		{
 			p1->updateBoard(loc1, loc2, 1, p1->getBoardValue(loc1, loc2));//marks hit ship with value of 1
-			return "Hit!";
+			return "hit";
 		}
 	}
 	return "error bool isP1 not assigned properly";
@@ -346,7 +346,7 @@ void Game::gRound(bool isP1) //true = p1
 
 	if(isTwoPlayers)
 	{
-		cout << "Input any key to start." << endl;
+		cout << "Press Y when ready!" << endl;
 		string x;
 		cin >> x;//maybe make not sucky
 
@@ -398,11 +398,11 @@ void Game::gControl() //true = p1
 
 	if (p1->isWin() == true) //true means lose
 	{
-		cout << "Player 2 wins!\n";
+		cout << "player 2 wins!\n";
 	}
 	else
 	{
-		cout << "Player 1 wins!\n";
+		cout << "player 1 wins!\n";
 	}
 	delete p1;
 	delete p2;
