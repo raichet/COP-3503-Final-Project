@@ -156,15 +156,48 @@ string Player::getBoard(bool pNum)
 			temp=temp+to_string(i+1)+"  ";
 		}
 			if(playerBoard[j][i] == 0) //water
-				temp = temp + " ~" + " ";
+// Emoji display
+				temp = temp + "🌊" + " ";
 			else if (playerBoard[j][i] == 1) //hit ship
-				temp = temp + " X" + " ";
+				temp = temp + "💥" + " ";
 			else if (playerBoard[j][i] == 2) //missed ship
-				temp = temp + " *" + " ";
+				temp = temp + "❌" + " ";
 			else if (playerBoard[j][i] >= 5 && pNum == true) //ship
-				temp = temp + " O" + " ";
+			{
+				if (playerBoard[j][i] == 5)
+				{
+					temp = temp + "🚢" + " ";
+				}
+				else if (playerBoard[j][i] == 6)
+				{
+					temp = temp + "🛳️" + " ";
+				}
+				else if (playerBoard[j][i] == 7)
+				{
+					temp = temp + "🛥️" + " ";
+				}
+				else if (playerBoard[j][i] == 8)
+				{
+					temp = temp + "🚣🏿‍♀️" + " ";
+				}
+				else if (playerBoard[j][i] == 9)
+				{
+					temp = temp + "⛵" + " ";
+				}
+			}
 			else
-				temp = temp + " ~" + " ";
+				temp = temp + "🌊" + " ";
+//  Non-emoji display
+// 				temp = temp + " ~" + " ";
+// 			else if (playerBoard[j][i] == 1) //hit ship
+// 				temp = temp + " X" + " ";
+// 			else if (playerBoard[j][i] == 2) //missed ship
+// 				temp = temp + " *" + " ";
+// 			else if (playerBoard[j][i] >= 5 && pNum == true) //ship
+// 				temp = temp + " O" + " ";
+// 			else
+// 				temp = temp + " ~" + " ";
+
 
 		}
 		//--------------------Test print grid with numbers--------------------
