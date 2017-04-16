@@ -52,7 +52,7 @@ void Game::printBoard(bool isP1)
 	}
     else if (!isP1 && !isTwoPlayers)
     {
-        cout << "battlebot is thinking" << endl;
+        cout << "Battlebot is thinking." << endl;
     }
 
 	cout << temp << endl;
@@ -83,11 +83,11 @@ void Game::fire(bool isP1)//determines coordinates of fire position(whether from
 		cin >> temp2;
 		cout << checkHit(temp, temp2, isP1) << endl;
 	}
-    
+
     else if((!isP1) && !isTwoPlayers)
     {
-        
-        
+
+
         //Randomly picks coordinates
         if (searching==false){
             temp = rand() % 10 + 1;
@@ -99,16 +99,18 @@ void Game::fire(bool isP1)//determines coordinates of fire position(whether from
                 AIhit[1] = temp2;
                 //Adds surrounding spaces to aiTargets vector
                 aiSearch();
+				searching=false;
             }
             else{
                 cout<< "Battlebot Missed"<< endl;
                 searching = false;
             }
+
         }
         //
         else {
             //choose hits from vector aiTargets
-            
+
             temp = AItargetsX.front();//first value of vector x position
             temp2 = AItargetsY.front();//second value of vector y position
             AItargetsX.erase(AItargetsX.begin());
@@ -119,6 +121,7 @@ void Game::fire(bool isP1)//determines coordinates of fire position(whether from
                 AIhit[1] = temp2;
                 //Adds surrounding spaces to aiTargets vector
                 aiSearch();
+				searching=false;	
             }
             if(AItargetsX.empty() && AItargetsY.empty()){
                 searching = false;
@@ -250,7 +253,7 @@ void Game::placeShips(bool player, bool isTwoPlayers)
                 while(!validPlacement)
                 {
                     anchorPointX = rand() % 10 + 1;
-                    
+
                     anchorPointY = rand() % 10 + 1;
                     temp = rand() % 4;
                     switch(temp)
@@ -360,9 +363,9 @@ void Game::gRound(bool isP1) //true = p1
         cout << "Press Y when ready!" << endl;
         string x;
         cin >> x;//maybe make not sucky
-        
+
         printBoard(isP1);
-        
+
         fire(isP1);
 
     }
