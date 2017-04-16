@@ -79,6 +79,13 @@ void Game::fire(bool isP1)//determines coordinates of fire position(whether from
 		cin >> temp2;
 		cout << checkHit(temp, temp2, isP1) << endl;
 	}
+    
+    else if((!isP1) && !isTwoPlayers)
+    {
+        temp = rand() % 10;
+        temp2 = rand() % 10;
+        cout << checkHit(temp, temp2, !isP1) << endl;
+    }
 	// else
 	// {
 	// 	if(/*using easy algorithm*/){
@@ -150,7 +157,7 @@ string Game::checkHit(int loc1, int loc2, bool isP1)//(Mjarvis1997) determines i
 //if parameter "player" is true, then player 1's board is being modified
 //otherwise if "player" is false, then player 2's board is being modified
 //assumes that player is inputting anchorpoints (x,y) in form "x y". Does not assume valid input
-void Game::placeShips(bool player)
+void Game::placeShips(bool player, bool isTwoPlayers)
 {
 	int anchorPointX;
 	int anchorPointY;
@@ -158,35 +165,69 @@ void Game::placeShips(bool player)
 	string orientation;
 	bool validPlacement = false;
 
-	if (player) {
-		cout<<"Player 1, please place your ship."<<endl;
-		while (shipsPlacedCounter < 5) {
-			validPlacement = false;
-			printBoard(true);
-			while (!validPlacement) {
-				cout << "Place your ship of length " << p1->getPlayerShips(shipsPlacedCounter) << ". What are the x and y coordinates?: " << endl;
-				cin >> anchorPointX >> anchorPointY;
-				cout << "What is the orientation of the ship? (up, down, left, right)" << endl;
-				cin >> orientation;
-				validPlacement = p1->modifyShips(anchorPointX, anchorPointY, orientation, p1->getPlayerShipTypes(shipsPlacedCounter));
-			}
-			shipsPlacedCounter++;
-		}
-	} else {
-		cout<<"Player 2, please place your ship."<<endl;
-		while (shipsPlacedCounter < 5) {
-			validPlacement = false;
-			printBoard(false);
-			while (!validPlacement) {
-				cout << "Place your ship of length " << p2->getPlayerShips(shipsPlacedCounter) << ". What are the x and y coordinates?: " << endl;
-				cin >> anchorPointX >> anchorPointY;
-				cout << "What is the orientation of the ship? (up, down, left, right)" << endl;
-				cin >> orientation;
-				validPlacement = p2->modifyShips(anchorPointX, anchorPointY, orientation, p2->getPlayerShipTypes(shipsPlacedCounter));
-			}
-			shipsPlacedCounter++;
-		}
-	}
+    if(isTwoPlayers){
+        if (player) {
+            cout<<"Player 1, please place your ship."<<endl;
+            while (shipsPlacedCounter < 5) {
+                validPlacement = false;
+                printBoard(true);
+                while (!validPlacement) {
+                    cout << "Place your ship of length " << p1->getPlayerShips(shipsPlacedCounter) << ". What are the x and y coordinates?: " << endl;
+                    cin >> anchorPointX >> anchorPointY;
+                    cout << "What is the orientation of the ship? (up, down, left, right)" << endl;
+                    cin >> orientation;
+                    validPlacement = p1->modifyShips(anchorPointX, anchorPointY, orientation, p1->getPlayerShipTypes(shipsPlacedCounter));
+                }
+                shipsPlacedCounter++;
+            }
+        }
+        else {
+            cout<<"Player 2, please place your ship."<<endl;
+            while (shipsPlacedCounter < 5) {
+                validPlacement = false;
+                printBoard(false);
+                while (!validPlacement) {
+                    cout << "Place your ship of length " << p2->getPlayerShips(shipsPlacedCounter) << ". What are the x and y coordinates?: " << endl;
+                    cin >> anchorPointX >> anchorPointY;
+                    cout << "What is the orientation of the ship? (up, down, left, right)" << endl;
+                    cin >> orientation;
+                    validPlacement = p2->modifyShips(anchorPointX, anchorPointY, orientation, p2->getPlayerShipTypes(shipsPlacedCounter));
+                }
+                shipsPlacedCounter++;
+            }
+        }
+    else(!isTwoPlayers)
+    {
+        if (player) {
+            cout<<"Player 1, please place your ship."<<endl;
+            while (shipsPlacedCounter < 5) {
+                validPlacement = false;
+                printBoard(true);
+                while (!validPlacement) {
+                    cout << "Place your ship of length " << p1->getPlayerShips(shipsPlacedCounter) << ". What are the x and y coordinates?: " << endl;
+                    cin >> anchorPointX >> anchorPointY;
+                    cout << "What is the orientation of the ship? (up, down, left, right)" << endl;
+                    cin >> orientation;
+                    validPlacement = p1->modifyShips(anchorPointX, anchorPointY, orientation, p1->getPlayerShipTypes(shipsPlacedCounter));
+                }
+                shipsPlacedCounter++;
+            }
+        }
+        else{
+            while(shipsPlaceCounter < 5){
+                validPlacement = false;
+                while(!validPlacement)
+                {
+                    anchorPointX = rand() % 10;
+                    anchorPointY = rand() % 10;
+                    orientation = rand() % 4;
+                    validPlacement = p2->modifyShips(anchorPointX, anchorPointY, orientation, p2->getPlayerShipTypes(shipsPlacedCounter));
+                }
+                shipsPlacedCounter++;
+            }
+        }
+
+    }
 }
 
 
@@ -271,15 +312,29 @@ void Game::gRound(bool isP1) //true = p1
 		fire(isP1);
 	}
 	//else for a.i.
+    else
+    {
+        
+    }
 }
 
-void Game::gControl() //true = p1
+void Game::gControl(bool isTwoPlayers) //true = p1
 {
 	bool playerBool = true;
 
 	//some ship place method here
-	placeShips(true);
-	placeShips(false);
+    //for 2players
+    if(isTwoPlayers)
+    {
+        placeShips(true,true);
+        placeShips(false,true);
+    }
+    //vs AI
+    else
+    {
+        placeShips(true,false);
+        placeShips(false,false);
+    }
 
 	while (p1->isWin() == false && p2->isWin() == false)
 	{
@@ -301,4 +356,5 @@ void Game::gControl() //true = p1
 	}
 	delete p1;
 	delete p2;
+
 }
