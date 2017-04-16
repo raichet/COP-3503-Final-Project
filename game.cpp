@@ -121,7 +121,7 @@ void Game::fire(bool isP1)//determines coordinates of fire position(whether from
                 AIhit[1] = temp2;
                 //Adds surrounding spaces to aiTargets vector
                 aiSearch();
-				searching=false;	
+				searching=false;
             }
             if(AItargetsX.empty() && AItargetsY.empty()){
                 searching = false;
@@ -190,7 +190,7 @@ string Game::checkHit(int loc1, int loc2, bool isP1)//(Mjarvis1997) determines i
 //otherwise if "player" is false, then player 2's board is being modified
 //assumes that player is inputting anchorpoints (x,y) in form "x y". Does not assume valid input
 void Game::placeShips(bool player, bool isTwoPlayers)
-{
+{	
 	int anchorPointX;
 	int anchorPointY;
 	int shipsPlacedCounter = 0;
@@ -209,7 +209,7 @@ void Game::placeShips(bool player, bool isTwoPlayers)
                     cin >> anchorPointX >> anchorPointY;
                     cout << "What is the orientation of the ship? (up, down, left, right)" << endl;
                     cin >> orientation;
-                    validPlacement = p1->modifyShips(anchorPointX, anchorPointY, orientation, p1->getPlayerShipTypes(shipsPlacedCounter));
+                    validPlacement = p1->modifyShips(anchorPointX, anchorPointY, orientation, p1->getPlayerShipTypes(shipsPlacedCounter), false);
                 }
                 shipsPlacedCounter++;
             }
@@ -224,7 +224,7 @@ void Game::placeShips(bool player, bool isTwoPlayers)
                     cin >> anchorPointX >> anchorPointY;
                     cout << "What is the orientation of the ship? (up, down, left, right)" << endl;
                     cin >> orientation;
-                    validPlacement = p2->modifyShips(anchorPointX, anchorPointY, orientation, p2->getPlayerShipTypes(shipsPlacedCounter));
+                    validPlacement = p2->modifyShips(anchorPointX, anchorPointY, orientation, p2->getPlayerShipTypes(shipsPlacedCounter), false);
                 }
                 shipsPlacedCounter++;
             }
@@ -242,7 +242,7 @@ void Game::placeShips(bool player, bool isTwoPlayers)
                     cin >> anchorPointX >> anchorPointY;
                     cout << "What is the orientation of the ship? (up, down, left, right)" << endl;
                     cin >> orientation;
-                    validPlacement = p1->modifyShips(anchorPointX, anchorPointY, orientation, p1->getPlayerShipTypes(shipsPlacedCounter));
+                    validPlacement = p1->modifyShips(anchorPointX, anchorPointY, orientation, p1->getPlayerShipTypes(shipsPlacedCounter), false);
                 }
                 shipsPlacedCounter++;
             }
@@ -267,7 +267,7 @@ void Game::placeShips(bool player, bool isTwoPlayers)
                         case 3: orientation = "right";
                             break;
                     }
-                    validPlacement = p2->modifyShips(anchorPointX, anchorPointY, orientation, p2->getPlayerShipTypes(shipsPlacedCounter));
+                    validPlacement = p2->modifyShips(anchorPointX, anchorPointY, orientation, p2->getPlayerShipTypes(shipsPlacedCounter), true);
                 }
                 shipsPlacedCounter++;
             }
