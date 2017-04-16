@@ -57,7 +57,6 @@ void Game::printBoard(bool isP1)
 void Game::fire(bool isP1)//determines coordinates of fire position(whether from a realPlayer or an AI) and then uses checkHit and updateBoard to make the according changes
 						  //(Mjarvis1997) added bool parameter so that game.fire can be used for both real and computer players
 {
-	
 	int temp;
 	int temp2;
 
@@ -80,17 +79,17 @@ void Game::fire(bool isP1)//determines coordinates of fire position(whether from
 		cin >> temp2;
 		cout << checkHit(temp, temp2, isP1) << endl;
 	}
-	else
-	{
-		if(/*using easy algorithm*/){
-			int attack = attackEasy() // (kriswawrzyniak) algorith for AI firing using easy algorithm 
-			temp = attack % 10; 
-			temp2 = attack /10 % 10; 
-			cout << checkHit(cleanInput(temp, 10), cleanInput(temp2, 10), false) << endl;
-		}
-		else /* using hard algorithm*/ 
-		
-	}
+	// else
+	// {
+	// 	if(/*using easy algorithm*/){
+	// 		int attack = attackEasy() // (kriswawrzyniak) algorith for AI firing using easy algorithm
+	// 		temp = attack % 10;
+	// 		temp2 = attack /10 % 10;
+	// 		cout << checkHit(cleanInput(temp, 10), cleanInput(temp2, 10), false) << endl;
+	// 	}
+	// 	else /* using hard algorithm*/
+	//
+	// }
 
 }
 //(Mjarvis1997) changed function type to string, so it can return the results of the hit, added currentPlayer parameter
@@ -281,7 +280,6 @@ void Game::gControl() //true = p1
 	//some ship place method here
 	placeShips(true);
 	placeShips(false);
-	
 
 	while (p1->isWin() == false && p2->isWin() == false)
 	{
