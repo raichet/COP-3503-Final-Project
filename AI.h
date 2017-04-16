@@ -10,6 +10,8 @@ class AI {
 	string difficulty; 
 
 	string playerName;
+	
+	vector <int> attackedSpaces; 
 
 	int AIBoard[10][10];
 
@@ -36,7 +38,9 @@ public:
 
 	bool isWin();
 
-	void attack(string difficulty); // Attacks the player using specified algorithm 
+	int attackEasy();
+	
+	int attackHard();
 };
 
 #endif
