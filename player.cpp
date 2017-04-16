@@ -135,6 +135,16 @@ string Player::getBoard(bool pNum)
 	{
 		temp = temp + "\n";
 
+		if (i==0) 	//formats the grid with top row of
+		{
+			temp=temp+"0  ";
+		for (int k=1 ; k<=10 ; k++)
+		{
+			temp=temp+" "+to_string(k)+" ";
+		}
+		temp=temp+"\n";
+	}				////numbering system
+
 		/*for (int j = 0; j < 10; j++)
 		{
 			if(playerBoard[j][i] == 0) //water
@@ -151,33 +161,41 @@ string Player::getBoard(bool pNum)
 		}*/
 		for (int j = 0; j < 10; j++)
 		{
+			if (j==0 && i==9) //formats the grid with left column of
+			{
+				temp=temp+to_string(i+1)+" ";
+			}
+			else if (j==0 && i!=9)
+			{
+				temp=temp+to_string(i+1)+"  ";
+			}				  //numbering system
 			if(playerBoard[j][i] == 0) //water
-				temp = temp + "0" + " ";
+				temp = temp + " 0" + " ";
 			else if (playerBoard[j][i] == 1) //hit ship
-				temp = temp + "1" + " ";
+				temp = temp + " 1" + " ";
 			else if (playerBoard[j][i] == 2) //missed ship
-				temp = temp + "2" + " ";
+				temp = temp + " 2" + " ";
 			else if (playerBoard[j][i] >= 5 && pNum == true) //ship
 			{
 				if (playerBoard[j][i] == 5)
 				{
-					temp = temp + "5" + " ";
+					temp = temp + " 5" + " ";
 				}
 				else if (playerBoard[j][i] == 6)
 				{
-					temp = temp + "6" + " ";
+					temp = temp + " 6" + " ";
 				}
 				else if (playerBoard[j][i] == 7)
 				{
-					temp = temp + "7" + " ";
+					temp = temp + " 7" + " ";
 				}
 				else if (playerBoard[j][i] == 8)
 				{
-					temp = temp + "8" + " ";
+					temp = temp + " 8" + " ";
 				}
 				else if (playerBoard[j][i] == 9)
 				{
-					temp = temp + "9" + " ";
+					temp = temp + " 9" + " ";
 				}
 			}
 			else
