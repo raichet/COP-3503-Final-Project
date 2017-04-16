@@ -44,12 +44,16 @@ void Game::printBoard(bool isP1)
 		temp = temp + "\n\n";
 		temp = temp + p2->getBoard(false);
 	}
-	else
+	else if (!isP1 && isTwoPlayers)
 	{
 		temp = p1->getBoard(false);
 		temp = temp + "\n\n";
 		temp = temp + p2->getBoard(true);
 	}
+    else if (!isP1 && !isTwoPlayers)
+    {
+        cout << "battlebot is thinking" << endl;
+    }
 
 	cout << temp << endl;
 }
@@ -82,21 +86,46 @@ void Game::fire(bool isP1)//determines coordinates of fire position(whether from
     
     else if((!isP1) && !isTwoPlayers)
     {
-        temp = rand() % 10;
-        temp2 = rand() % 10;
-        cout << checkHit(temp, temp2, !isP1) << endl;
+        
+        
+        //Randomly picks coordinates
+        if (searching==false){
+            temp = rand() % 10 + 1;
+            temp2 = rand() % 10 + 1;
+            if (checkHit(temp, temp2, isP1).compare("hit") == 0){
+                cout << "Battlebot Hit" << endl;
+                searching = true;
+                AIhit[0] = temp;
+                AIhit[1] = temp2;
+                //Adds surrounding spaces to aiTargets vector
+                aiSearch();
+            }
+            else{
+                cout<< "Battlebot Missed"<< endl;
+                searching = false;
+            }
+        }
+        //
+        else {
+            //choose hits from vector aiTargets
+            
+            temp = AItargetsX.front();//first value of vector x position
+            temp2 = AItargetsY.front();//second value of vector y position
+            AItargetsX.erase(AItargetsX.begin());
+            AItargetsY.erase(AItargetsY.begin());
+            if (checkHit(temp, temp2, isP1).compare("hit") == 0){
+                searching = true;
+                AIhit[0] = temp;
+                AIhit[1] = temp2;
+                //Adds surrounding spaces to aiTargets vector
+                aiSearch();
+            }
+            if(AItargetsX.empty() && AItargetsY.empty()){
+                searching = false;
+            }
+
+        }
     }
-	// else
-	// {
-	// 	if(/*using easy algorithm*/){
-	// 		int attack = attackEasy() // (kriswawrzyniak) algorith for AI firing using easy algorithm
-	// 		temp = attack % 10;
-	// 		temp2 = attack /10 % 10;
-	// 		cout << checkHit(cleanInput(temp, 10), cleanInput(temp2, 10), false) << endl;
-	// 	}
-	// 	else /* using hard algorithm*/
-	//
-	// }
 
 }
 //(Mjarvis1997) changed function type to string, so it can return the results of the hit, added currentPlayer parameter
@@ -164,6 +193,7 @@ void Game::placeShips(bool player, bool isTwoPlayers)
 	int shipsPlacedCounter = 0;
 	string orientation;
 	bool validPlacement = false;
+    int temp;
 
     if(isTwoPlayers){
         if (player) {
@@ -196,7 +226,8 @@ void Game::placeShips(bool player, bool isTwoPlayers)
                 shipsPlacedCounter++;
             }
         }
-    else(!isTwoPlayers)
+    }
+    else if(!isTwoPlayers)
     {
         if (player) {
             cout<<"Player 1, please place your ship."<<endl;
@@ -214,13 +245,25 @@ void Game::placeShips(bool player, bool isTwoPlayers)
             }
         }
         else{
-            while(shipsPlaceCounter < 5){
+            while(shipsPlacedCounter < 5){
                 validPlacement = false;
                 while(!validPlacement)
                 {
-                    anchorPointX = rand() % 10;
-                    anchorPointY = rand() % 10;
-                    orientation = rand() % 4;
+                    anchorPointX = rand() % 10 + 1;
+                    
+                    anchorPointY = rand() % 10 + 1;
+                    temp = rand() % 4;
+                    switch(temp)
+                    {
+                        case 0: orientation = "up";
+                            break;
+                        case 1: orientation = "down";
+                            break;
+                        case 2: orientation = "left";
+                            break;
+                        case 3: orientation = "right";
+                            break;
+                    }
                     validPlacement = p2->modifyShips(anchorPointX, anchorPointY, orientation, p2->getPlayerShipTypes(shipsPlacedCounter));
                 }
                 shipsPlacedCounter++;
@@ -314,11 +357,18 @@ void Game::gRound(bool isP1) //true = p1
 	//else for a.i.
     else
     {
+        cout << "Press Y when ready!" << endl;
+        string x;
+        cin >> x;//maybe make not sucky
         
+        printBoard(isP1);
+        
+        fire(isP1);
+
     }
 }
 
-void Game::gControl(bool isTwoPlayers) //true = p1
+void Game::gControl() //true = p1
 {
 	bool playerBool = true;
 
@@ -357,4 +407,33 @@ void Game::gControl(bool isTwoPlayers) //true = p1
 	delete p1;
 	delete p2;
 
+}
+
+void Game::aiSearch(){
+    int x = AIhit [0];
+    int y = AIhit [1];
+    if (x+1<11 && x+1>0){
+        if(p1 ->getBoardValue(x+1,y) == 0 || p1 ->getBoardValue(x+1,y)){
+            AItargetsX.push_back(x+1);
+            AItargetsY.push_back(y);
+        }
+    }
+    if (x-1<11 && x-1>0){
+        if(p1 ->getBoardValue(x-1,y) == 0 || p1 ->getBoardValue(x-1,y) >= 5){
+            AItargetsX.push_back(x-1);
+            AItargetsY.push_back(y);
+        }
+    }
+    if (y+1<11 && y+1>0){
+            if(p1 ->getBoardValue(x,y+1) == 0 || p1 ->getBoardValue(x,y+1) >= 5){
+                AItargetsX.push_back(x);
+                AItargetsY.push_back(y+1);
+        }
+    }
+    if (y-1<11 && y-1>0){
+            if(p1 ->getBoardValue(x,y-1) == 0 || p1 ->getBoardValue(x,y-1) >= 5){
+                AItargetsX.push_back(x);
+                AItargetsY.push_back(y-1);
+            }
+    }
 }
