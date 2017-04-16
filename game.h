@@ -4,6 +4,7 @@
 #include "player.h"
 #include <iostream>
 #include <time.h>
+#include <vector> 
 
 using namespace std;
 
@@ -14,7 +15,13 @@ class Game {
 	Player* p2;
 	
 	bool isTwoPlayers;
-
+    bool AIsearching;
+    int AIhit [2];
+    int AItarget [2]; 
+    vector<int> AItargetsX;
+    vector<int> AItargetsY;
+    bool searching = false;
+    
 public:
 	Game();
 
@@ -24,7 +31,7 @@ public:
 
 	void updateBoard(string loc1, string loc2);
 
-	void placeShips(bool player);
+	void placeShips(bool player, bool isTwoPlayers);
 
 	void makePlayers(bool isTwoPlayers);//(Mjarvis1997) changed from "void makePlayer(bool pType)"
 
@@ -35,6 +42,8 @@ public:
 	void gRound(bool isP);
 
 	void gControl();
+    
+    void aiSearch();
 
 
 };
