@@ -18,7 +18,7 @@ void Player::resetBoard()
 
 //modifyShips method assumes correct data type of arguments, but not correct range
 //modifyShips method will return false if x/y is out of range, orientation is not a valid direction, or shipType is out of range
-bool Player::modifyShips(int x, int y, string orientation, int shipType)
+bool Player::modifyShips(int x, int y, string orientation, int shipType, bool AI)
 {
 	int shipLength;
 
@@ -42,13 +42,17 @@ bool Player::modifyShips(int x, int y, string orientation, int shipType)
 
 	if (orientation.compare("right") == 0) {
 		if (shipLength > (10 - x + 1)) {
-			cout << "Ship runs off right edge of board" << endl;
+			if (!AI) {
+				cout << "Ship runs off right edge of board" << endl;
+			}
 			return false;
 		}
 		else {
 			for (int i = x - 1; i < (x - 1) + shipLength; i++) {
 				if (playerBoard[i][y - 1] != 0) {
-					cout << "The space (" << i << "," << y << ") was already occupied." << endl;
+					if (!AI) {
+						cout << "The space (" << i << "," << y << ") was already occupied." << endl;
+					}
 					return false;
 				}
 			}
@@ -60,13 +64,17 @@ bool Player::modifyShips(int x, int y, string orientation, int shipType)
 	}
 	else if (orientation.compare("left") == 0) {
 		if (shipLength > x) {
-			cout << "Ship runs off left edge of board" << endl;
+			if (!AI) {
+				cout << "Ship runs off left edge of board" << endl;
+			}
 			return false;
 		}
 		else {
 			for (int i = x - 1; i > (x - 1) - shipLength; i--) {
 				if (playerBoard[i][y - 1] != 0) {
-					cout << "The space (" << i << "," << y << ") was already occupied." << endl;
+					if (!AI) {
+						cout << "The space (" << i << "," << y << ") was already occupied." << endl;
+					}
 					return false;
 				}
 			}
@@ -78,13 +86,17 @@ bool Player::modifyShips(int x, int y, string orientation, int shipType)
 	}
 	else if (orientation.compare("down") == 0) {
 		if (shipLength > (10 - y + 1)) {
-			cout << "Ship runs off bottom edge of board" << endl;
+			if (!AI) {
+				cout << "Ship runs off bottom edge of board" << endl;
+			}
 			return false;
 		}
 		else {
 			for (int i = y - 1; i < (y - 1) + shipLength; i++) {
 				if (playerBoard[x - 1][i] != 0) {
-					cout << "The space (" << x << "," << i << ") was already occupied." << endl;
+					if (!AI) {
+						cout << "The space (" << x << "," << i << ") was already occupied." << endl;
+					}
 					return false;
 				}
 			}
@@ -96,13 +108,17 @@ bool Player::modifyShips(int x, int y, string orientation, int shipType)
 	}
 	else if (orientation.compare("up") == 0) {
 		if (shipLength > y) {
-			cout << "Ship runs off top edge of board" << endl;
+			if (!AI) {
+				cout << "Ship runs off top edge of board" << endl;
+			}
 			return false;
 		}
 		else {
 			for (int i = y - 1; i > (y - 1) - shipLength; i--) {
 				if (playerBoard[x - 1][i] != 0) {
-					cout << "The space (" << x << "," << i << ") was already occupied." << endl;
+					if (!AI) {
+						cout << "The space (" << x << "," << i << ") was already occupied." << endl;
+					}
 					return false;
 				}
 			}
