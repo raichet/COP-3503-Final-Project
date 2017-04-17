@@ -66,10 +66,15 @@ void Game::fire(bool isP1)//determines coordinates of fire position(whether from
 
 	if (isP1)//(Mjarvis1997) fires for first player
 	{
-		cout << "Please select x" << endl;
-		cin >> temp;
-		cout << "Please select y" << endl;
-		cin >> temp2;
+		cout << "Please choose a location to strike. What are the x and y coordinates? " << endl;
+		cin >> temp >>temp2;
+		while(cin.fail()) {
+			cin.clear();
+			cin.ignore(256,'\n');
+			cout<<"Please only input whole numbers for both x and y coordinates."<<endl;
+			cin >> temp >> temp2;
+		}
+
 		cout << checkHit(temp, temp2, isP1) << endl;
 
 			//cout << cleanInput(temp) << endl;
@@ -77,10 +82,14 @@ void Game::fire(bool isP1)//determines coordinates of fire position(whether from
 	}
 	if ((!isP1) && isTwoPlayers)//(Mjarvis1997) fires for real second player
 	{
-		cout << "Please select x" << endl;
-		cin >> temp;
-		cout << "Please select y" << endl;
-		cin >> temp2;
+		cout << "Please choose a location to strike. What are the x and y coordinates? " << endl;
+		cin >> temp >>temp2;
+		while(cin.fail()) {
+			cin.clear();
+			cin.ignore(256,'\n');
+			cout<<"Please only input whole numbers for both x and y coordinates."<<endl;
+			cin >> temp >> temp2;
+		}
 		cout << checkHit(temp, temp2, isP1) << endl;
 	}
 
@@ -192,7 +201,7 @@ string Game::checkHit(int loc1, int loc2, bool isP1)//(Mjarvis1997) determines i
 //otherwise if "player" is false, then player 2's board is being modified
 //assumes that player is inputting anchorpoints (x,y) in form "x y". Does not assume valid input
 void Game::placeShips(bool player, bool isTwoPlayers)
-{	
+{
 	int anchorPointX;
 	int anchorPointY;
 	int shipsPlacedCounter = 0;
@@ -207,9 +216,15 @@ void Game::placeShips(bool player, bool isTwoPlayers)
                 validPlacement = false;
                 printBoard(true);
                 while (!validPlacement) {
-                    cout << "Place your ship of length " << p1->getPlayerShips(shipsPlacedCounter) << ". What are the x and y coordinates?: " << endl;
+                    cout << "Place your ship of length " << p1->getPlayerShips(shipsPlacedCounter) << ". What are the x and y coordinates? " << endl;
                     cin >> anchorPointX >> anchorPointY;
-                    cout << "What is the orientation of the ship? (up, down, left, right)" << endl;
+					while(cin.fail()) {
+						cin.clear();
+						cin.ignore(256,'\n');
+						cout<<"Please only input whole numbers for both x and y coordinates."<<endl;
+						cin >> anchorPointX >> anchorPointY;
+					}
+                    cout << "What is the orientation of the ship? (up, down, left, right, lower case only)" << endl;
                     cin >> orientation;
                     validPlacement = p1->modifyShips(anchorPointX, anchorPointY, orientation, p1->getPlayerShipTypes(shipsPlacedCounter), false);
                 }
@@ -222,9 +237,15 @@ void Game::placeShips(bool player, bool isTwoPlayers)
                 validPlacement = false;
                 printBoard(false);
                 while (!validPlacement) {
-                    cout << "Place your ship of length " << p2->getPlayerShips(shipsPlacedCounter) << ". What are the x and y coordinates?: " << endl;
+                    cout << "Place your ship of length " << p2->getPlayerShips(shipsPlacedCounter) << ". What are the x and y coordinates? " << endl;
                     cin >> anchorPointX >> anchorPointY;
-                    cout << "What is the orientation of the ship? (up, down, left, right)" << endl;
+					while(cin.fail()) {
+						cin.clear();
+						cin.ignore(256,'\n');
+						cout<<"Please only input whole numbers for both x and y coordinates."<<endl;
+						cin >> anchorPointX >> anchorPointY;
+					}
+                    cout << "What is the orientation of the ship? (up, down, left, right, lower case only)" << endl;
                     cin >> orientation;
                     validPlacement = p2->modifyShips(anchorPointX, anchorPointY, orientation, p2->getPlayerShipTypes(shipsPlacedCounter), false);
                 }
@@ -240,9 +261,15 @@ void Game::placeShips(bool player, bool isTwoPlayers)
                 validPlacement = false;
                 printBoard(true);
                 while (!validPlacement) {
-                    cout << "Place your ship of length " << p1->getPlayerShips(shipsPlacedCounter) << ". What are the x and y coordinates?: " << endl;
+                    cout << "Place your ship of length " << p1->getPlayerShips(shipsPlacedCounter) << ". What are the x and y coordinates? " << endl;
                     cin >> anchorPointX >> anchorPointY;
-                    cout << "What is the orientation of the ship? (up, down, left, right)" << endl;
+					while(cin.fail()) {
+						cin.clear();
+						cin.ignore(256,'\n');
+						cout<<"Please only input whole numbers for both x and y coordinates."<<endl;
+						cin >> anchorPointX >> anchorPointY;
+					};
+                    cout << "What is the orientation of the ship? (up, down, left, right, lower case only)" << endl;
                     cin >> orientation;
                     validPlacement = p1->modifyShips(anchorPointX, anchorPointY, orientation, p1->getPlayerShipTypes(shipsPlacedCounter), false);
                 }

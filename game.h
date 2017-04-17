@@ -4,7 +4,7 @@
 #include "player.h"
 #include <iostream>
 #include <time.h>
-#include <vector> 
+#include <vector>
 
 using namespace std;
 
@@ -13,15 +13,15 @@ class Game {
 
 	Player* p1;
 	Player* p2;
-	
+
 	bool isTwoPlayers;
     bool AIsearching;
     int AIhit [2];
-    int AItarget [2]; 
+    int AItarget [2];
     vector<int> AItargetsX;
     vector<int> AItargetsY;
     bool searching = false;
-    
+
 public:
 	Game();
 
@@ -42,7 +42,7 @@ public:
 	void gRound(bool isP);
 
 	void gControl();
-    
+
     void aiSearch();
 
 
