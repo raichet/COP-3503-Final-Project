@@ -90,7 +90,9 @@ void Game::fire(bool isP1)//determines coordinates of fire position(whether from
 
         //Randomly picks coordinates
         if (searching==false){
+	    srand (time(NULL));
             temp = rand() % 10 + 1;
+	    srand (time(NULL));
             temp2 = rand() % 10 + 1;
             if (checkHit(temp, temp2, isP1).compare("hit") == 0){
                 cout << "Battlebot Hit" << endl;
@@ -252,9 +254,11 @@ void Game::placeShips(bool player, bool isTwoPlayers)
                 validPlacement = false;
                 while(!validPlacement)
                 {
+		    srand (time(NULL));
                     anchorPointX = rand() % 10 + 1;
-
+		    srand (time(NULL));
                     anchorPointY = rand() % 10 + 1;
+		    srand (time(NULL));
                     temp = rand() % 4;
                     switch(temp)
                     {
