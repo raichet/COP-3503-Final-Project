@@ -6,7 +6,8 @@
 
 using namespace std;
 
-class Player {
+class Player
+{
 
 	string playerName;
 
@@ -28,7 +29,7 @@ public:
 	bool isWin();
 
 	string getBoard(bool pNum);
-
+	
 	string getName();
 
 	int getPlayerShipTypes(int index);

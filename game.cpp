@@ -50,16 +50,16 @@ void Game::printBoard(bool isP1)
 		temp = temp + "\n\n";
 		temp = temp + p2->getBoard(true);
 	}
-    else if (!isP1 && !isTwoPlayers)
-    {
-        cout << "Battlebot is thinking." << endl;
-    }
+	else if (!isP1 && !isTwoPlayers)
+	{
+		cout << "Battlebot is thinking." << endl;
+	}
 
 	cout << temp << endl;
 }
 
 void Game::fire(bool isP1)//determines coordinates of fire position(whether from a realPlayer or an AI) and then uses checkHit and updateBoard to make the according changes
-						  //(Mjarvis1997) added bool parameter so that game.fire can be used for both real and computer players
+//(Mjarvis1997) added bool parameter so that game.fire can be used for both real and computer players
 {
 	int temp;
 	int temp2;
@@ -68,7 +68,8 @@ void Game::fire(bool isP1)//determines coordinates of fire position(whether from
 	{
 		cout << "Please choose a location to strike. What are the x and y coordinates? " << endl;
 		cin >> temp >>temp2;
-		while(cin.fail()) {
+		while(cin.fail())
+		{
 			cin.clear();
 			cin.ignore(256,'\n');
 			cout<<"Please only input whole numbers for both x and y coordinates."<<endl;
@@ -77,14 +78,15 @@ void Game::fire(bool isP1)//determines coordinates of fire position(whether from
 
 		cout << checkHit(temp, temp2, isP1) << endl;
 
-			//cout << cleanInput(temp) << endl;
-			//cout << cleanInput(temp2) << endl;
+		//cout << cleanInput(temp) << endl;
+		//cout << cleanInput(temp2) << endl;
 	}
 	if ((!isP1) && isTwoPlayers)//(Mjarvis1997) fires for real second player
 	{
 		cout << "Please choose a location to strike. What are the x and y coordinates? " << endl;
 		cin >> temp >>temp2;
-		while(cin.fail()) {
+		while(cin.fail())
+		{
 			cin.clear();
 			cin.ignore(256,'\n');
 			cout<<"Please only input whole numbers for both x and y coordinates."<<endl;
@@ -93,53 +95,59 @@ void Game::fire(bool isP1)//determines coordinates of fire position(whether from
 		cout << checkHit(temp, temp2, isP1) << endl;
 	}
 
-    else if((!isP1) && !isTwoPlayers)
-    {
+	else if((!isP1) && !isTwoPlayers)
+	{
 
 
-        //Randomly picks coordinates
-        if (searching==false){
-	    srand (time(NULL));
-            temp = rand() % 10 + 1;
-	    srand (time(NULL));
-            temp2 = rand() % 10 + 1;
-            if (checkHit(temp, temp2, isP1).compare("hit") == 0){
-                cout << "Battlebot Hit" << endl;
-                searching = true;
-                AIhit[0] = temp;
-                AIhit[1] = temp2;
-                //Adds surrounding spaces to aiTargets vector
-                aiSearch();
+		//Randomly picks coordinates
+		if (searching==false)
+		{
+			srand (time(NULL));
+			temp = rand() % 10 + 1;
+			srand (time(NULL));
+			temp2 = rand() % 10 + 1;
+			if (checkHit(temp, temp2, isP1).compare("hit") == 0)
+			{
+				cout << "Battlebot Hit" << endl;
+				searching = true;
+				AIhit[0] = temp;
+				AIhit[1] = temp2;
+				//Adds surrounding spaces to aiTargets vector
+				aiSearch();
 				searching=false;
-            }
-            else{
-                cout<< "Battlebot Missed"<< endl;
-                searching = false;
-            }
+			}
+			else
+			{
+				cout<< "Battlebot Missed"<< endl;
+				searching = false;
+			}
 
-        }
-        //
-        else {
-            //choose hits from vector aiTargets
+		}
+		//
+		else
+		{
+			//choose hits from vector aiTargets
 
-            temp = AItargetsX.front();//first value of vector x position
-            temp2 = AItargetsY.front();//second value of vector y position
-            AItargetsX.erase(AItargetsX.begin());
-            AItargetsY.erase(AItargetsY.begin());
-            if (checkHit(temp, temp2, isP1).compare("hit") == 0){
-                searching = true;
-                AIhit[0] = temp;
-                AIhit[1] = temp2;
-                //Adds surrounding spaces to aiTargets vector
-                aiSearch();
+			temp = AItargetsX.front();//first value of vector x position
+			temp2 = AItargetsY.front();//second value of vector y position
+			AItargetsX.erase(AItargetsX.begin());
+			AItargetsY.erase(AItargetsY.begin());
+			if (checkHit(temp, temp2, isP1).compare("hit") == 0)
+			{
+				searching = true;
+				AIhit[0] = temp;
+				AIhit[1] = temp2;
+				//Adds surrounding spaces to aiTargets vector
+				aiSearch();
 				searching=false;
-            }
-            if(AItargetsX.empty() && AItargetsY.empty()){
-                searching = false;
-            }
+			}
+			if(AItargetsX.empty() && AItargetsY.empty())
+			{
+				searching = false;
+			}
 
-        }
-    }
+		}
+	}
 
 }
 //(Mjarvis1997) changed function type to string, so it can return the results of the hit, added currentPlayer parameter
@@ -207,104 +215,119 @@ void Game::placeShips(bool player, bool isTwoPlayers)
 	int shipsPlacedCounter = 0;
 	string orientation;
 	bool validPlacement = false;
-    int temp;
+	int temp;
 
-    if(isTwoPlayers){
-        if (player) {
-            cout<<"Player 1, please place your ship."<<endl;
-            while (shipsPlacedCounter < 5) {
-                validPlacement = false;
-                printBoard(true);
-                while (!validPlacement) {
-                    cout << "Place your ship of length " << p1->getPlayerShips(shipsPlacedCounter) << ". What are the x and y coordinates? " << endl;
-                    cin >> anchorPointX >> anchorPointY;
-					while(cin.fail()) {
+	if(isTwoPlayers)
+	{
+		if (player)
+		{
+			cout<<"Player 1, please place your ship."<<endl;
+			while (shipsPlacedCounter < 5)
+			{
+				validPlacement = false;
+				printBoard(true);
+				while (!validPlacement)
+				{
+					cout << "Place your ship of length " << p1->getPlayerShips(shipsPlacedCounter) << ". What are the x and y coordinates? " << endl;
+					cin >> anchorPointX >> anchorPointY;
+					while(cin.fail())
+					{
 						cin.clear();
 						cin.ignore(256,'\n');
 						cout<<"Please only input whole numbers for both x and y coordinates."<<endl;
 						cin >> anchorPointX >> anchorPointY;
 					}
-                    cout << "What is the orientation of the ship? (up, down, left, right, lower case only)" << endl;
-                    cin >> orientation;
-                    validPlacement = p1->modifyShips(anchorPointX, anchorPointY, orientation, p1->getPlayerShipTypes(shipsPlacedCounter), false);
-                }
-                shipsPlacedCounter++;
-            }
-        }
-        else {
-            cout<<"Player 2, please place your ship."<<endl;
-            while (shipsPlacedCounter < 5) {
-                validPlacement = false;
-                printBoard(false);
-                while (!validPlacement) {
-                    cout << "Place your ship of length " << p2->getPlayerShips(shipsPlacedCounter) << ". What are the x and y coordinates? " << endl;
-                    cin >> anchorPointX >> anchorPointY;
-					while(cin.fail()) {
+					cout << "What is the orientation of the ship? (up, down, left, right, lower case only)" << endl;
+					cin >> orientation;
+					validPlacement = p1->modifyShips(anchorPointX, anchorPointY, orientation, p1->getPlayerShipTypes(shipsPlacedCounter), false);
+				}
+				shipsPlacedCounter++;
+			}
+		}
+		else
+		{
+			cout<<"Player 2, please place your ship."<<endl;
+			while (shipsPlacedCounter < 5)
+			{
+				validPlacement = false;
+				printBoard(false);
+				while (!validPlacement)
+				{
+					cout << "Place your ship of length " << p2->getPlayerShips(shipsPlacedCounter) << ". What are the x and y coordinates? " << endl;
+					cin >> anchorPointX >> anchorPointY;
+					while(cin.fail())
+					{
 						cin.clear();
 						cin.ignore(256,'\n');
 						cout<<"Please only input whole numbers for both x and y coordinates."<<endl;
 						cin >> anchorPointX >> anchorPointY;
 					}
-                    cout << "What is the orientation of the ship? (up, down, left, right, lower case only)" << endl;
-                    cin >> orientation;
-                    validPlacement = p2->modifyShips(anchorPointX, anchorPointY, orientation, p2->getPlayerShipTypes(shipsPlacedCounter), false);
-                }
-                shipsPlacedCounter++;
-            }
-        }
-    }
-    else if(!isTwoPlayers)
-    {
-        if (player) {
-            cout<<"Player 1, please place your ship."<<endl;
-            while (shipsPlacedCounter < 5) {
-                validPlacement = false;
-                printBoard(true);
-                while (!validPlacement) {
-                    cout << "Place your ship of length " << p1->getPlayerShips(shipsPlacedCounter) << ". What are the x and y coordinates? " << endl;
-                    cin >> anchorPointX >> anchorPointY;
-					while(cin.fail()) {
+					cout << "What is the orientation of the ship? (up, down, left, right, lower case only)" << endl;
+					cin >> orientation;
+					validPlacement = p2->modifyShips(anchorPointX, anchorPointY, orientation, p2->getPlayerShipTypes(shipsPlacedCounter), false);
+				}
+				shipsPlacedCounter++;
+			}
+		}
+	}
+	else if(!isTwoPlayers)
+	{
+		if (player)
+		{
+			cout<<"Player 1, please place your ship."<<endl;
+			while (shipsPlacedCounter < 5)
+			{
+				validPlacement = false;
+				printBoard(true);
+				while (!validPlacement)
+				{
+					cout << "Place your ship of length " << p1->getPlayerShips(shipsPlacedCounter) << ". What are the x and y coordinates? " << endl;
+					cin >> anchorPointX >> anchorPointY;
+					while(cin.fail())
+					{
 						cin.clear();
 						cin.ignore(256,'\n');
 						cout<<"Please only input whole numbers for both x and y coordinates."<<endl;
 						cin >> anchorPointX >> anchorPointY;
 					};
-                    cout << "What is the orientation of the ship? (up, down, left, right, lower case only)" << endl;
-                    cin >> orientation;
-                    validPlacement = p1->modifyShips(anchorPointX, anchorPointY, orientation, p1->getPlayerShipTypes(shipsPlacedCounter), false);
-                }
-                shipsPlacedCounter++;
-            }
-        }
-        else{
-            while(shipsPlacedCounter < 5){
-                validPlacement = false;
-                while(!validPlacement)
-                {
-		    srand (time(NULL));
-                    anchorPointX = rand() % 10 + 1;
-		    srand (time(NULL));
-                    anchorPointY = rand() % 10 + 1;
-		    srand (time(NULL));
-                    temp = rand() % 4;
-                    switch(temp)
-                    {
-                        case 0: orientation = "up";
-                            break;
-                        case 1: orientation = "down";
-                            break;
-                        case 2: orientation = "left";
-                            break;
-                        case 3: orientation = "right";
-                            break;
-                    }
-                    validPlacement = p2->modifyShips(anchorPointX, anchorPointY, orientation, p2->getPlayerShipTypes(shipsPlacedCounter), true);
-                }
-                shipsPlacedCounter++;
-            }
-        }
+					cout << "What is the orientation of the ship? (up, down, left, right, lower case only)" << endl;
+					cin >> orientation;
+					validPlacement = p1->modifyShips(anchorPointX, anchorPointY, orientation, p1->getPlayerShipTypes(shipsPlacedCounter), false);
+				}
+				shipsPlacedCounter++;
+			}
+		}
+		else
+		{
+			while(shipsPlacedCounter < 5)
+			{
+				validPlacement = false;
+				while(!validPlacement)
+				{
+					srand (time(NULL));
+					anchorPointX = rand() % 10 + 1;
+					srand (time(NULL));
+					anchorPointY = rand() % 10 + 1;
+					srand (time(NULL));
+					temp = rand() % 4;
+					switch(temp)
+					{
+						case 0: orientation = "up";
+						break;
+						case 1: orientation = "down";
+						break;
+						case 2: orientation = "left";
+						break;
+						case 3: orientation = "right";
+						break;
+					}
+					validPlacement = p2->modifyShips(anchorPointX, anchorPointY, orientation, p2->getPlayerShipTypes(shipsPlacedCounter), true);
+				}
+				shipsPlacedCounter++;
+			}
+		}
 
-    }
+	}
 }
 
 
@@ -318,9 +341,7 @@ void Game::makePlayers(bool isTwoPlayers)//(Mjarvis1997)changed pType to isTwoPl
 		cout << "Player 1 enter name: " << endl;
 		cin >> temp;
 		p1 = new Player(temp);
-
 		temp = "";
-
 		cout << "Player 2 enter name: " << endl;
 		cin >> temp;
 		p2 = new Player(temp);
@@ -331,11 +352,9 @@ void Game::makePlayers(bool isTwoPlayers)//(Mjarvis1997)changed pType to isTwoPl
 		cout << "Player 1 enter name:" << endl;
 		cin >> temp;
 		p1 = new Player(temp);
-
 		temp = "";
-
 		cout << "A 'BattleBot' has been created for you to test your skills against!";
-			p2 = new Player("BattleBot");
+		p2 = new Player("BattleBot");
 	}
 
 }
@@ -351,7 +370,8 @@ int Game::cleanInput(string input, int range)
 	t1 = input[0];
 	t1 -= 48;
 
-	if (input.size() > 1) {
+	if (input.size() > 1)
+	{
 		t2 = input[1];
 		t2 -= 48;
 
@@ -361,7 +381,7 @@ int Game::cleanInput(string input, int range)
 	}
 
 	if (t1 < 1 || t1 > range)
-		t1 = -1;
+	t1 = -1;
 
 
 	return t1;
@@ -374,13 +394,13 @@ void Game::gRound(bool isP1) //true = p1
 	//cout << "\033[2J\033[1;1H";?
 
 	if(isP1)
-		cout << "\033[1;32mPlayer 1's turn!\033[0m" << endl;
+	cout << "\033[1;32mPlayer 1's turn!\033[0m" << endl;
 	else
-		cout << "\033[1;34mPlayer 2's turn!\033[0m" << endl;
+	cout << "\033[1;34mPlayer 2's turn!\033[0m" << endl;
 
 	if(isTwoPlayers)
 	{
-		cout << "Press Y when ready!" << endl;
+		cout << "Input any key when ready!" << endl;
 		string x;
 		cin >> x;//maybe make not sucky
 
@@ -389,17 +409,17 @@ void Game::gRound(bool isP1) //true = p1
 		fire(isP1);
 	}
 	//else for a.i.
-    else
-    {
-        cout << "Press Y when ready!" << endl;
-        string x;
-        cin >> x;//maybe make not sucky
+	else
+	{
+		cout << "Input any key when ready!" << endl;
+		string x;
+		cin >> x;//maybe make not sucky
 
-        printBoard(isP1);
+		printBoard(isP1);
 
-        fire(isP1);
+		fire(isP1);
 
-    }
+	}
 }
 
 void Game::gControl() //true = p1
@@ -407,27 +427,27 @@ void Game::gControl() //true = p1
 	bool playerBool = true;
 
 	//some ship place method here
-    //for 2players
-    if(isTwoPlayers)
-    {
-        placeShips(true,true);
-        placeShips(false,true);
-    }
-    //vs AI
-    else
-    {
-        placeShips(true,false);
-        placeShips(false,false);
-    }
+	//for 2players
+	if(isTwoPlayers)
+	{
+		placeShips(true,true);
+		placeShips(false,true);
+	}
+	//vs AI
+	else
+	{
+		placeShips(true,false);
+		placeShips(false,false);
+	}
 
 	while (p1->isWin() == false && p2->isWin() == false)
 	{
 		gRound(playerBool);
 
 		if (playerBool == true)
-			playerBool = false;
+		playerBool = false;
 		else
-			playerBool = true;
+		playerBool = true;
 	}
 
 	if (p1->isWin() == true) //true means lose
@@ -443,31 +463,40 @@ void Game::gControl() //true = p1
 
 }
 
-void Game::aiSearch(){
-    int x = AIhit [0];
-    int y = AIhit [1];
-    if (x+1<11 && x+1>0){
-        if(p1 ->getBoardValue(x+1,y) == 0 || p1 ->getBoardValue(x+1,y)){
-            AItargetsX.push_back(x+1);
-            AItargetsY.push_back(y);
-        }
-    }
-    if (x-1<11 && x-1>0){
-        if(p1 ->getBoardValue(x-1,y) == 0 || p1 ->getBoardValue(x-1,y) >= 5){
-            AItargetsX.push_back(x-1);
-            AItargetsY.push_back(y);
-        }
-    }
-    if (y+1<11 && y+1>0){
-            if(p1 ->getBoardValue(x,y+1) == 0 || p1 ->getBoardValue(x,y+1) >= 5){
-                AItargetsX.push_back(x);
-                AItargetsY.push_back(y+1);
-        }
-    }
-    if (y-1<11 && y-1>0){
-            if(p1 ->getBoardValue(x,y-1) == 0 || p1 ->getBoardValue(x,y-1) >= 5){
-                AItargetsX.push_back(x);
-                AItargetsY.push_back(y-1);
-            }
-    }
+void Game::aiSearch()
+{
+	int x = AIhit [0];
+	int y = AIhit [1];
+	if (x+1<11 && x+1>0)
+	{
+		if(p1 ->getBoardValue(x+1,y) == 0 || p1 ->getBoardValue(x+1,y))
+		{
+			AItargetsX.push_back(x+1);
+			AItargetsY.push_back(y);
+		}
+	}
+	if (x-1<11 && x-1>0)
+	{
+		if(p1 ->getBoardValue(x-1,y) == 0 || p1 ->getBoardValue(x-1,y) >= 5)
+		{
+			AItargetsX.push_back(x-1);
+			AItargetsY.push_back(y);
+		}
+	}
+	if (y+1<11 && y+1>0)
+	{
+		if(p1 ->getBoardValue(x,y+1) == 0 || p1 ->getBoardValue(x,y+1) >= 5)
+		{
+			AItargetsX.push_back(x);
+			AItargetsY.push_back(y+1);
+		}
+	}
+	if (y-1<11 && y-1>0)
+	{
+		if(p1 ->getBoardValue(x,y-1) == 0 || p1 ->getBoardValue(x,y-1) >= 5)
+		{
+			AItargetsX.push_back(x);
+			AItargetsY.push_back(y-1);
+		}
+	}
 }
