@@ -121,7 +121,7 @@ void Game::fire(bool isP1)//determines coordinates of fire position(whether from
                 AIhit[1] = temp2;
                 //Adds surrounding spaces to aiTargets vector
                 aiSearch();
-				searching=false;	
+				searching=false;
             }
             if(AItargetsX.empty() && AItargetsY.empty()){
                 searching = false;
