@@ -9,24 +9,25 @@
 using namespace std;
 
 
-class Game {
+class Game
+{
 
 	Player* p1;
 	Player* p2;
 
 	bool isTwoPlayers;
-    bool AIsearching;
-    int AIhit [2];
-    int AItarget [2];
-    vector<int> AItargetsX;
-    vector<int> AItargetsY;
-    bool searching = false;
+	bool AIsearching;
+	int AIhit [2];
+	int AItarget [2];
+	vector<int> AItargetsX;
+	vector<int> AItargetsY;
+	bool searching = false;
 
 public:
 	Game();
 
 	void printBoard(bool pNum);
-
+	
 	string checkHit(int loc1, int loc2, bool isP1);//(Mjarvis1997) changed from void to string
 
 	void updateBoard(string loc1, string loc2);
@@ -43,7 +44,7 @@ public:
 
 	void gControl();
 
-    void aiSearch();
+	void aiSearch();
 
 
 };
